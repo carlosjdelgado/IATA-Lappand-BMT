@@ -21,7 +21,10 @@
             <td>@Model.ArrivalCity</td>
             <td>@offer.Price</td>
             <td>
-                @Html.ActionLink("Accept / Offer", "Index", "Acceptance", new { ProposalId = Model.ProposalId, OfferId = offer.OfferId }, null)
+                @if (offer.IsBestPrice)
+                {
+                    @Html.ActionLink("Accept / Offer", "Index", "Acceptance", new { ProposalId = Model.ProposalId, OfferId = offer.OfferId }, null)
+                }
             </td>
         </tr>
         }
