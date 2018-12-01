@@ -2,7 +2,6 @@
 using BMT.Customer.Web.Mappers;
 using BMT.Customer.Web.ServiceContracts;
 using BMT.Customer.Web.Services;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -26,9 +25,9 @@ namespace BMT.Customer.Web.Controllers
 
         private void SetBestPrice(OffersDto offersDto)
         {
-            var offersList = offersDto.Offers.ToList();
+            var offersList = offersDto.Offers.ToList().OrderBy(o => o.Price);
 
-            offersList.OrderBy(o => o.Price).FirstOrDefault().SetAsBestPrice();
+            offersList.FirstOrDefault().SetAsBestPrice();
 
             offersDto.Offers = offersList;
         }

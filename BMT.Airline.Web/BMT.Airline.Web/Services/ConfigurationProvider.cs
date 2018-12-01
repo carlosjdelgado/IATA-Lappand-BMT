@@ -10,5 +10,6 @@ namespace BMT.Airline.Web.Services
         public IEnumerable<string> UnnaceptableOrigins => (ConfigurationManager.AppSettings["UnacceptableOrigins"]).Split(',').ToList();
         public IEnumerable<string> UnnaceptableDestinations => (ConfigurationManager.AppSettings["UnnaceptableDestinations"]).Split(',').ToList();
         public decimal MinimumAcceptablePrice => decimal.Parse(ConfigurationManager.AppSettings["MinimumAcceptablePrice"]);
+        public string AuthorizationKey => ConfigurationManager.AppSettings["AuthorizationKey"];
     }
 }
