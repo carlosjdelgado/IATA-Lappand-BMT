@@ -32,7 +32,14 @@
                 <td>
                     @if (proposal.IsAcceptable)
                     {
-                        @Html.ActionLink("Make offer", "Index", "Acceptance",new { ProposalId = proposal.ProposalId }, null)
+                        if (proposal.AllowMoreOffers)
+                        {
+                            @Html.ActionLink("Make offer", "Index", "Acceptance", new { ProposalId = proposal.ProposalId }, null);
+                        }
+                        else
+                        {
+                            @Html.ActionLink("View", "Index", "Acceptance", new { ProposalId = proposal.ProposalId }, null);
+                        }
                     }
                 </td>
             </tr>

@@ -15,5 +15,6 @@ namespace BMT.Airline.Web.Models.DTOs
         public DateTime OutboundDate { get; set; }
         public DateTime InboundDate { get; set; }
         public decimal Price { get; set; }
+        public bool Selected { get; set; }
     }
 }

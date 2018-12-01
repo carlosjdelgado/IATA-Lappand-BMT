@@ -17,7 +17,8 @@ namespace BMT.Airline.Web.Mappers
                 CreationTime = offer.CreationTime,
                 DepartureDate = offer.OutboundDate,
                 ReturnDate = offer.InboundDate,
-                Price = offer.Price
+                Price = offer.Price,
+                Selected = offer.Selected
             };
         }
     }
