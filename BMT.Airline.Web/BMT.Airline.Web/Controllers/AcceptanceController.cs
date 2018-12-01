@@ -12,10 +12,12 @@ namespace BMT.Airline.Web.Controllers
     public class AcceptanceController : Controller
     {
         private ProposalsService _proposalsService;
+        private OffersService _offersService;
         
         public AcceptanceController()
         {
             _proposalsService = new ProposalsService();
+            _offersService = new OffersService();
         }
 
         // GET: Acceptance
@@ -25,5 +27,12 @@ namespace BMT.Airline.Web.Controllers
             var p = await _proposalsService.GetProposal(proposalId);
             return View(p);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> PostOffer(OfferRequest request)
+        {
+            await _offersService.PostOffer(request);
+            return RedirectToAction("Index", new { ProposalId = request.ProposalId });
+        } 
     }
 }

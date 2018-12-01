@@ -6,48 +6,85 @@
 
 <h2>Make a counter offer or accept the proposal</h2>
 
-<div class="row margin-top">
-    <form id="customerForm" name="customerForm" method="post" action="">
-        <div class="form-group">
-            <label for="departureDatetime">Departure Date:</label>
-            <input id="departureDatetime" value="@Model.DepartureDate.ToString("yyyy-MM-dd")" class="form-control" type="date" name="departureDatetime" min="2018-12-02" max="2019-12-02" />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5">
+            <form id="customerForm" name="customerForm" method="post" action="@Url.Action("PostOffer","Acceptance")">
+                <input type="hidden" value="@Model.ProposalId" name="proposalId" />
+                <div class="form-group">
+                    <label for="departureDatetime">Departure Date:</label>
+                    <input id="departureDatetime" value="@Model.DepartureDate.ToString("yyyy-MM-dd")" class="form-control" type="date" name="departureDate" />
+                </div>
+
+                <div class="form-group">
+                    <label for="arrivalDatetime">Arrival Date:</label>
+                    <input id="arrivalDatetime" value="@Model.ReturnDate.ToString("yyyy-MM-dd")" class="form-control" type="date" name="returnDate" />
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input id="price" value="@Model.Price" class="form-control" type="number" name="price" />
+                </div>
+
+                <button type="submit" class="btn btn-primary">Send Offer</button>
+                <span>@Html.ActionLink("Go to Proposals", "Index", "Proposals")</span>
+                
+            </form>
         </div>
-
-        <div class="form-group">
-            <label for="arrivalDatetime">Arrival Date:</label>
-            <input id="arrivalDatetime" value="@Model.ReturnDate.ToString("yyyy-MM-dd")" class="form-control" type="date" name="arrivalDatetime" min="2018-12-02" max="2019-12-02" />
+        <div class="col-lg-5">
+            <div class="row">
+                <br />
+                <br />
+                <div class="row">
+                    Proposed Price: @Model.Price €
+                </div>
+                <div class="row">
+                    Departure Date: @Model.DepartureDate.ToShortDateString()
+                </div>
+                <div class="row">
+                    Return Date: @Model.ReturnDate.ToShortDateString()
+                </div>
+                <div class="row">
+                    Passengers:
+                    <ul>
+                        @foreach (var passenger in Model.Passengers)
+                        {
+                            <li>
+                                @passenger.FirstName @passenger.SecondName - @passenger.PassengerType
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label for="price">Price:</label>
-            <input id="price" value="@Model.Price" class="form-control" type="number" name="price" />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Send Offer</button>
-    </form>
-</div>
-
-<div>
-    <h3>Proposal data</h3>
-    <div class="row">
-        Price: @Model.Price €
     </div>
+    <br />
     <div class="row">
-        Departure Date: @Model.DepartureDate
-    </div>
-    <div class="row">
-        Return Date: @Model.ReturnDate
-    </div>
-    <div class="row">
-        Passengers:
-        <ul>
-            @foreach (var passenger in Model.Passengers)
-            {
-                <li>
-                    @passenger.FirstName @passenger.SecondName - @passenger.PassengerType
-                </li>
-            }
-        </ul>
+        <h3>Received offers</h3>
+        <table class="table" id="proposals-table">
+            <thead>
+                <tr>
+                    <th>Creation Date</th>
+                    <th>Airline</th>
+                    <th>Departure Date</th>
+                    <th>Return Date</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var offer in Model.Offers)
+                {
+                    <tr>
+                        <td>@offer.CreationTime</td>
+                        <td>@offer.AirlineName</td>
+                        <td>@offer.DepartureDate.ToShortDateString()</td>
+                        <td>@offer.ReturnDate.ToShortDateString()</td>
+                        <td>@offer.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
     </div>
 </div>
 
