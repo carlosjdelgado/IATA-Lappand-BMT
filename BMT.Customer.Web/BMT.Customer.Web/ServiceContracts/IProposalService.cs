@@ -7,7 +7,7 @@ namespace BMT.Customer.Web.ServiceContracts
 {
     public interface IProposalService
     {
-        Task<IEnumerable<ProposalModel>> GetProposal();
+        Task<IEnumerable<ProposalModel>> GetProposals();
         Task<HttpResponseMessage> SendProposal(ProposalModel proposalModel);
     }
 }

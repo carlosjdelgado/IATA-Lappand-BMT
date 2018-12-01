@@ -22,7 +22,7 @@ namespace BMT.Customer.Web.Controllers
 
         public async Task<ActionResult> Proposals()
         {
-            var proposalModel = await _proposalService.GetProposal();
+            var proposalModel = await _proposalService.GetProposals();
 
             var proposalsDto = MapProposalDto(proposalModel);
 

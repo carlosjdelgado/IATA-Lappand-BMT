@@ -23,7 +23,7 @@
             <td>
                 @if (proposal.IsAcceptable)
                 {
-                    @Html.ActionLink("Accept", "Index", "Acceptance", new { OfferId = proposal.OfferId }, null)
+                    @Html.ActionLink("Accept / Offer", "Index", "Acceptance", new { OfferId = proposal.OfferId, ProposalId = proposal.ProposalId }, null)
                 }
             </td>
         </tr>

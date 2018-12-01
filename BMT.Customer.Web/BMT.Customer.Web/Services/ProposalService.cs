@@ -15,7 +15,7 @@ namespace BMT.Customer.Web.Services
 
         private static readonly HttpClient client = new HttpClient();
 
-        public async Task<IEnumerable<ProposalModel>> GetProposal()
+        public async Task<IEnumerable<ProposalModel>> GetProposals()
         {
             var response = await client.GetAsync(BidMyTripProposalUrl).ConfigureAwait(false);
 
