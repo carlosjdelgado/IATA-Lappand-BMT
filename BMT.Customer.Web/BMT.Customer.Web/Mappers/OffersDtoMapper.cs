@@ -16,7 +16,7 @@ namespace BMT.Customer.Web.Mappers
                 OutboundDate = proposalModel.OutboundDate,
                 InboundDate = proposalModel.InboundDate,
                 Price = proposalModel.Price,
-                Offers = proposalModel.Offers.Select(OfferDtoMapper.Map)
+                Offers = proposalModel.Offers?.Select(OfferDtoMapper.Map)
             };
         }
     }

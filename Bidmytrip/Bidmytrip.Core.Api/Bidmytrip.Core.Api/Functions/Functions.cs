@@ -30,7 +30,7 @@ namespace Bidmytrip.Core.Api
                     return new BadRequestResult();
                 }
 
-                var service = new BlockChainService(log);
+                var service = new BidMyTripService(log, new WorkBenchService());
 
                 service.PostProposals(deserializedContent.Proposals);
 
@@ -58,7 +58,7 @@ namespace Bidmytrip.Core.Api
 
                 var authToken = req.Headers.ContainsKey(AuthTokenHeader) ? req.Headers[AuthTokenHeader][0] : string.Empty;
 
-                var service = new BlockChainService(log);
+                var service = new BidMyTripService(log, new WorkBenchService());
 
                 var newProposal = service.PostProposal(authToken, proposal);
 
@@ -72,6 +72,34 @@ namespace Bidmytrip.Core.Api
             }            
         }
 
+        [FunctionName("PostProposalConfirm")]
+        public static IActionResult PostProposalConfirm(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "proposals/confirm")] ProposalConfirmedDto proposalConfirmedDto,
+            HttpRequest req, TraceWriter log)
+        {
+            try
+            {
+                if (!proposalConfirmedDto.IsValid())
+                {
+                    return new BadRequestResult();
+                }
+
+                var authToken = req.Headers.ContainsKey(AuthTokenHeader) ? req.Headers[AuthTokenHeader][0] : string.Empty;
+
+                var service = new BidMyTripService(log, new WorkBenchService());
+
+                var proposal = service.ConfirmProposal(authToken, proposalConfirmedDto);
+
+                return new OkObjectResult(proposal);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+
+                throw;
+            }
+        }
+
         [FunctionName("GetProposals")]
         public static IActionResult GetProposals(
              [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "proposals")] HttpRequest req, 
@@ -81,7 +109,7 @@ namespace Bidmytrip.Core.Api
             {
                 var authToken = req.Headers.ContainsKey(AuthTokenHeader) ? req.Headers[AuthTokenHeader][0] : string.Empty;
 
-                var service = new BlockChainService(log);
+                var service = new BidMyTripService(log, new WorkBenchService());
 
                 var proposal = service.GetProposals(authToken);
 
@@ -104,7 +132,7 @@ namespace Bidmytrip.Core.Api
             {
                 var authToken = req.Headers.ContainsKey(AuthTokenHeader) ? req.Headers[AuthTokenHeader][0] : string.Empty;
 
-                var service = new BlockChainService(log);
+                var service = new BidMyTripService(log, new WorkBenchService());
 
                 var modifiedProposal = service.PostOffer(authToken, offer);
 

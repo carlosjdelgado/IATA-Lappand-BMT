@@ -19,7 +19,7 @@
 		  "secondName": "Smith",
 		  "passengerType": "ADULT"
 	  },
-  "TimeToLive": "2018-12-20T00:00:00",
+  "TimeToLive": "2018-12-20T00:00:00"
 },
 {
   "travellerName": "Rafael",

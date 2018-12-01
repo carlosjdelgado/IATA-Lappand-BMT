@@ -20,6 +20,7 @@ namespace Bidmytrip.Common.Workbench.Client
 		static int CLIENT_API_TIMEOUT = 10;
 		static int POLLY_RETRY_COUNT = 5;
         
+        /*
 		#region Singleton Implementation
 
         static GatewayApi instance = null;
@@ -43,10 +44,11 @@ namespace Bidmytrip.Common.Workbench.Client
 		}
     
 		#endregion
+        */
 
 		static int numberOfFailedTries;
-		public static string SiteUrl = string.Empty;
-		public static string BaseUrl
+		public string SiteUrl = string.Empty;
+		public string BaseUrl
 		{
 			get {
 				if(SiteUrl.EndsWith("/"))
@@ -470,13 +472,13 @@ namespace Bidmytrip.Common.Workbench.Client
             }
             catch (JsonException je)
             {
-				ExceptionThrown?.Invoke(Instance,je);
+				//ExceptionThrown?.Invoke(Instance,je);
                 Debug.WriteLine($"Error posting object {nameof(T)} - Unknown: {je.Message}");
                 return (false, je.Message);
             }
             catch (HttpRequestException we)
             {
-				ExceptionThrown?.Invoke(Instance, we);
+				//ExceptionThrown?.Invoke(Instance, we);
                 Debug.WriteLine($"Error posting object {nameof(T)} - Unknown: {we.Message}");
                 if (we.Message.Contains("401"))
                 {
@@ -510,7 +512,7 @@ namespace Bidmytrip.Common.Workbench.Client
             }
             catch (HttpRequestException we)
             {
-                ExceptionThrown?.Invoke(Instance, we);
+                //ExceptionThrown?.Invoke(Instance, we);
                 Debug.WriteLine($"Error posting form");
                 if (we.Message.Contains("401"))
                 {
@@ -547,12 +549,12 @@ namespace Bidmytrip.Common.Workbench.Client
 			}
 			catch (JsonException je)
 			{
-				ExceptionThrown?.Invoke(Instance, je);
+				//ExceptionThrown?.Invoke(Instance, je);
 				Debug.WriteLine($"Error getting object {nameof(T)} - Json: {je.Message}");
 			}
 			catch (HttpRequestException we)
 			{
-				ExceptionThrown?.Invoke(Instance, we);
+				//ExceptionThrown?.Invoke(Instance, we);
 				var requestFailedArgs = new RequestFailedEventArgs();
 
 				if (we.Message.Contains("401"))
@@ -564,7 +566,7 @@ namespace Bidmytrip.Common.Workbench.Client
 					if (numberOfFailedTries == 3)
 					{
 						numberOfFailedTries = 0;
-						Instance.ExpiredAccessToken?.Invoke(Instance, EventArgs.Empty);
+						//ExpiredAccessToken?.Invoke(Instance, EventArgs.Empty);
 					}
 				}
 				else
@@ -578,23 +580,24 @@ namespace Bidmytrip.Common.Workbench.Client
 
 					requestFailedArgs.Message = "There was an error in the running service. Please try again.";
 
-					Instance.MaxTimeoutExceeded?.Invoke(Instance, requestFailedArgs);
+					//Instance.MaxTimeoutExceeded?.Invoke(Instance, requestFailedArgs);
 				}
 
 				Debug.WriteLine($"Error getting object {nameof(T)} - Http: {we.Message}");
 			}
 			catch (TaskCanceledException te)
 			{
+                /*
 				ExceptionThrown?.Invoke(Instance, te);
 				Instance.MaxTimeoutExceeded?.Invoke(Instance, new RequestFailedEventArgs
 				{
 					Title = "Timed out",
 					Message = $"The backend timed out after {POLLY_RETRY_COUNT} tries"
-				});
+				});*/
 			}
 			catch (Exception e)
 			{
-				ExceptionThrown?.Invoke(Instance, e);
+				//ExceptionThrown?.Invoke(Instance, e);
 				Debug.WriteLine($"Error getting object {nameof(T)} - Unknown: {e.Message}");
 			}
 
@@ -629,7 +632,7 @@ namespace Bidmytrip.Common.Workbench.Client
             }
 			catch (Exception e)
             {
-                ExceptionThrown?.Invoke(Instance, e);
+                //ExceptionThrown?.Invoke(Instance, e);
                 Debug.WriteLine($"Error deleting object");
                 if (e.Message.Contains("401"))
                 {
@@ -668,7 +671,7 @@ namespace Bidmytrip.Common.Workbench.Client
 			}
 			catch (Exception e)
 			{
-				ExceptionThrown?.Invoke(Instance, e);
+				//ExceptionThrown?.Invoke(Instance, e);
 				Debug.WriteLine($"Error patching object");
 				if (e.Message.Contains("401"))
 				{
@@ -713,13 +716,13 @@ namespace Bidmytrip.Common.Workbench.Client
             }
             catch (JsonException je)
             {
-                ExceptionThrown?.Invoke(Instance, je);
+                //ExceptionThrown?.Invoke(Instance, je);
                 Debug.WriteLine($"Error posting object {nameof(T)} - Unknown: {je.Message}");
                 return (false, je.Message);
             }
             catch (HttpRequestException we)
             {
-                ExceptionThrown?.Invoke(Instance, we);
+                //ExceptionThrown?.Invoke(Instance, we);
                 Debug.WriteLine($"Error posting object {nameof(T)} - Unknown: {we.Message}");
                 if (we.Message.Contains("401"))
                 {
