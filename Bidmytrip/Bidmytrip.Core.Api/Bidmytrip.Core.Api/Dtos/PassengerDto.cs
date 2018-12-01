@@ -4,6 +4,6 @@
     {
         public string FirstName { get; set; }
         public string SecondName { get; set; }
-        public PassengerTypeDto Type { get; set; }
+        public string Type { get; set; } // ADULT / CHILD / INFANT
     }
 }

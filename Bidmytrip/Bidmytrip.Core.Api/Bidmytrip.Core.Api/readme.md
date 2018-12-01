@@ -11,7 +11,7 @@ POST PROPOSAL -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/
 	  {
 	  "firstName": "first name",
 	  "secondName": "second name",
-	  "type": 0
+	  "type": "ADULT"
 	}
   ],
   "TimeToLive": "2018-09-12T00:00:00",
@@ -35,12 +35,6 @@ POST OFFER -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/Offers
 
 ************************************************************
 
-PassengerTypeDto
-{
-    Adult = 0,
-    Child = 10,
-    Infant = 20
-}
-
+Passenger Type: // ADULT / CHILD / INFANT
 Proposal Status: // PROPOSED / ACCEPTED / CONFIRMED / CLOSED
 
