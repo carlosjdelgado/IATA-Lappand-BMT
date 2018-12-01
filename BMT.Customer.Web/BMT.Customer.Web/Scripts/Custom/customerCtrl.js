@@ -26,13 +26,7 @@ $(document).ready(function () {
             data: { CustomerFormRequestDto: CustomerFormRequestDto },
             cache: false,
             success: function (result) {
-                if (result.StatusCode === 200) {
-                    alert("Proposal sended");
-                }
-                alert("Something went wrong");
-            },
-            error: function (ex) {
-                alert("Something went wrong");
+                alert("Proposal sended");
             }
         });
     });

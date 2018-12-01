@@ -14,16 +14,19 @@
     <tbody>
         @foreach (var proposal in Model.Proposals)
         {
-            <tr>
-                <td>@proposal.OutboundDate.ToShortDateString()</td>
-                <td>@proposal.InboundDate.ToShortDateString()</td>
-                <td>@proposal.DepartureCity</td>
-                <td>@proposal.ArrivalCity</td>
-                <td>@proposal.Price</td>
-                <td>
+        <tr class="@( proposal.IsAcceptable ? "bg-success" : "")">
+            <td>@proposal.OutboundDate.ToShortDateString()</td>
+            <td>@proposal.InboundDate.ToShortDateString()</td>
+            <td>@proposal.DepartureCity</td>
+            <td>@proposal.ArrivalCity</td>
+            <td>@proposal.Price</td>
+            <td>
+                @if (proposal.IsAcceptable)
+                {
                     @Html.ActionLink("Accept", "Index", "Acceptance", new { OfferId = proposal.OfferId }, null)
-                </td>
-            </tr>
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>
