@@ -85,7 +85,7 @@ namespace BMT.Airline.Web.Mappers
 
         private static bool BuildIsAcceptable(ProposalDto proposalDto, ConfigurationProvider configuration)
         {
-            if (proposalDto.Price > configuration.MinimumAcceptablePrice)
+            if (proposalDto.Price < configuration.MinimumAcceptablePrice)
                 return false;
 
             if (configuration.UnnaceptableOrigins.Any(uo => uo == proposalDto.Origin))
