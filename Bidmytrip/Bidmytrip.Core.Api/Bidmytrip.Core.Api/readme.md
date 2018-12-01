@@ -33,6 +33,14 @@ POST PROPOSAL -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/
 
 
 
+POST PROPOSAL CONFIRM -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/Confirm
+{
+	"ProposalId": "ProposalId",
+	"OfferId": "OfferId"
+}
+
+
+
 GET PROPOSAL -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/
 
 
