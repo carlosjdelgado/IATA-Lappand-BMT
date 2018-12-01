@@ -20,55 +20,19 @@ namespace BMT.Customer.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public async Task<ActionResult> Proposals()
         {
-            var proposalModel = await _proposalService.GetProposals();
+            var proposalsModel = await _proposalService.GetProposals();
 
-            var proposalsDto = MapProposalDto(proposalModel);
+            var disctinctProposals = GetDistinctProposals(proposalsModel);
+
+            var proposalsDto = new ProposalsDto
+            {
+                Proposals = MapProposalDto(disctinctProposals)
+            };
 
             return View("~/Views/Customer/Proposals.cshtml", proposalsDto);
-        }
-
-        private ProposalsDto MapProposalDto(IEnumerable<ProposalModel> proposalModel)
-        {
-            var proposalDtoList = new List<ProposalDto>();
-
-            foreach (var proposal in proposalModel)
-            {
-                foreach (var offer in proposal.Offers)
-                {
-                    proposalDtoList.Add(
-                        new ProposalDto
-                        {
-                            ProposalId = proposal.ProposalId,
-                            OfferId = offer.OfferId,
-                            AirlineName = offer.AirlineName,
-                            OutboundDate = offer.OutboundDate,
-                            InboundDate = offer.InboundDate,
-                            DepartureCity = proposal.Origin,
-                            ArrivalCity = proposal.Destiny,
-                            Price = offer.Price
-                        }
-                    );
-                }
-            }
-
-            SetBestPrice(proposalDtoList);
-
-            return new ProposalsDto
-            {
-                Proposals = proposalDtoList
-            };
-        }
-
-        private void SetBestPrice(List<ProposalDto> proposalDtoList)
-        {
-            var disctinctProposals = proposalDtoList.GroupBy(o => o.ProposalId).Select(g => g.First());
-
-            foreach (var disctinctProposal in disctinctProposals)
-            {
-                proposalDtoList.Where(p => p.ProposalId == disctinctProposal.ProposalId).OrderBy(p => p.Price).First().IsAcceptable = true;
-            }
         }
 
         [HttpPost]
@@ -77,6 +41,31 @@ namespace BMT.Customer.Web.Controllers
             var proposalModel = MapProposalModel(CustomerFormRequestDto);
 
             return await _proposalService.SendProposal(proposalModel);
+        }
+
+        private IEnumerable<ProposalDto> MapProposalDto(IEnumerable<ProposalModel> distintictProposals)
+        {
+            var proposalDtoList = new List<ProposalDto>();
+
+            foreach (var distintictProposal in distintictProposals)
+            {
+                proposalDtoList.Add(new ProposalDto
+                {
+                    ProposalId = distintictProposal.ProposalId,
+                    OutboundDate = distintictProposal.OutboundDate,
+                    InboundDate = distintictProposal.InboundDate,
+                    DepartureCity = distintictProposal.Origin,
+                    ArrivalCity = distintictProposal.Destiny,
+                    Price = distintictProposal.Price
+                });
+            }
+
+            return proposalDtoList;
+        }
+
+        private IEnumerable<ProposalModel> GetDistinctProposals(IEnumerable<ProposalModel> proposalsModel)
+        {
+            return proposalsModel.GroupBy(o => o.ProposalId).Select(g => g.First());
         }
 
         private ProposalModel MapProposalModel(CustomerFormDto CustomerFormRequestDto)
