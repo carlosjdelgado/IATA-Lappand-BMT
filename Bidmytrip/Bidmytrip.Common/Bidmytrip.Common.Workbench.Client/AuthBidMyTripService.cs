@@ -10,7 +10,7 @@ namespace Bidmytrip.Common.Workbench.Client
             string tenantId = "4d13e0f3-a99e-4062-a125-77677db96130";
             string clientApplicationId = "795c7380-5dcd-42ca-9751-9f30665c1312";
             string clientSecret = "%{=^@[+&{:]==*B^h.?=!)4+@#W|.+:-#?}]h&+|!-?>=&=*&/=d:C@?:";
-            string workBenchApiAppId = "7816681b-95f7-459d-9182-7ab496a17dfa";
+            string workBenchApiAppId = "c337ecea-efb3-404e-bc38-ff679788d24e";
 
             AuthenticationResult result = null;
             AuthenticationContext authenticationContext = new AuthenticationContext("https://login.microsoftonline.com/" + tenantId);

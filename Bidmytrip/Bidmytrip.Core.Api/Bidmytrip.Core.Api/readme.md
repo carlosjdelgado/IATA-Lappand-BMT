@@ -7,16 +7,30 @@ POST PROPOSAL -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/
   "outboundDate": "2018-10-12",
   "inboundDate": "2018-12-12",
   "price": "100.0",
-  "passengers": [
-	  {
-	  "firstName": "first name",
-	  "secondName": "second name",
-	  "type": "ADULT"
-	}
-  ],
+  "Passenger1": {
+		  "firstName": "Manolo",
+		  "secondName": "Escobar",
+		  "passengerType": "ADULT"
+	  },
+  "Passenger2": {
+		  "firstName": "Manola",
+		  "secondName": "Escobar",
+		  "passengerType": "ADULT"
+	  },
+  "Passenger3": {
+		"firstName": "Manolo",
+		"secondName": "Hijo",
+		"passengerType": "CHILD"
+	},
+  "Passenger4": {
+		"firstName": "Manola",
+		"secondName": "Hija",
+		"passengerType": "INFANT"
+	},
   "TimeToLive": "2018-09-12T00:00:00",
   "Status": "PROPOSED"
 }
+
 
 
 GET PROPOSAL -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/

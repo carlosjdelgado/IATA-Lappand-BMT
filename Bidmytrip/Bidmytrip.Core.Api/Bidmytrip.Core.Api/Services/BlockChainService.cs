@@ -1,7 +1,9 @@
-﻿using Bidmytrip.Core.Api.Dtos;
+﻿
+using Bidmytrip.Core.Api.Dtos;
 using Microsoft.Azure.WebJobs.Host;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Bidmytrip.Core.Api.Services
 {
@@ -18,13 +20,7 @@ namespace Bidmytrip.Core.Api.Services
         {
             CacheService.Proposals.Add(proposal);
 
-            /*
-            var authToken = await AuthBidMyTripService.Auth();
-            GatewayApi.Instance.SetAuthToken(authToken);
-            GatewayApi.SiteUrl = "https://iagndcblockchain-qqau77-api.azurewebsites.net";
-            var response = await GatewayApi.Instance.GetApplicationsAsync();
-            _log.Info(response.ToString());
-            */
+            //RecordNewProposal().Wait();
         }
 
         internal IEnumerable<ProposalDto> GetProposals()
@@ -38,5 +34,14 @@ namespace Bidmytrip.Core.Api.Services
 
             proposal.Offers.Add(offer);
         }
+        /*
+        private async Task RecordNewProposal()
+        {
+            var authToken = await AuthBidMyTripService.Auth();
+            GatewayApi.Instance.SetAuthToken(authToken);
+            GatewayApi.SiteUrl = "https://iagndcblockchain-qqau77-api.azurewebsites.net";
+            var response = await GatewayApi.Instance.GetApplicationsAsync();
+            _log.Info(response.ToString());
+        }*/
     }
 }

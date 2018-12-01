@@ -14,7 +14,10 @@ namespace Bidmytrip.Core.Api.Dtos
         public DateTime? InboundDate { get; set; }
         public decimal Price { get; set; }
 
-        public IList<PassengerDto> Passengers { get; set; }
+        public PassengerDto Passenger1 { get; set; }
+        public PassengerDto Passenger2 { get; set; }
+        public PassengerDto Passenger3 { get; set; }
+        public PassengerDto Passenger4 { get; set; }
 
         public DateTime TimeToLive { get; set; }
 
