@@ -1,11 +1,12 @@
-﻿@model IEnumerable<BMT.Airline.Web.Models.ProposalViewModel>
+﻿@model BMT.Airline.Web.Models.ProposalsReportViewModel
 @{
 
     ViewBag.Title = "Index";
+    ViewBag.AirlineName = Model.AirlineName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Active Proposals</h2>
+<h2>Active Proposals - @Model.AirlineName</h2>
 
 <table class="table table-hover" id="proposals-table">
     <thead>
@@ -19,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var proposal in Model)
+        @foreach (var proposal in Model.Proposals)
         {
             <tr class="@(proposal.IsAcceptable ? "bg-success" : "bg-danger")">
                 <td>@proposal.DepartureDate.ToShortDateString()</td>
@@ -30,7 +31,7 @@
                 <td>
                     @if (proposal.IsAcceptable)
                     {
-                        <a>Accept</a>
+                        @Html.ActionLink("Accept", "Index", "Acceptance",new { ProposalId = proposal.ProposalId }, null)
                     }
                 </td>
             </tr>

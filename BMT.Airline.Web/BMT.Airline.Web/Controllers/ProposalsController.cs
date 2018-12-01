@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,9 +18,9 @@ namespace BMT.Airline.Web.Controllers
         }
 
         // GET: Proposals
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var proposals = _proposalsService.GetActiveProposals();
+            var proposals = await _proposalsService.GetProposalsReport();
             return View(proposals);
         }
     }

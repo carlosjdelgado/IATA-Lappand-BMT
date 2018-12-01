@@ -1,0 +1,57 @@
+﻿@model BMT.Airline.Web.Models.ProposalViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Make a counter offer or accept the proposal</h2>
+
+<div class="row margin-top">
+    <form id="customerForm" name="customerForm" method="post" action="">
+        <div class="form-group">
+            <label for="departureDatetime">Departure Date:</label>
+            <input id="departureDatetime" value="@Model.DepartureDate.ToString("yyyy-MM-dd")" class="form-control" type="date" name="departureDatetime" min="2018-12-02" max="2019-12-02" />
+        </div>
+
+        <div class="form-group">
+            <label for="arrivalDatetime">Arrival Date:</label>
+            <input id="arrivalDatetime" value="@Model.ReturnDate.ToString("yyyy-MM-dd")" class="form-control" type="date" name="arrivalDatetime" min="2018-12-02" max="2019-12-02" />
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input id="price" value="@Model.Price" class="form-control" type="number" name="price" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send Offer</button>
+    </form>
+</div>
+
+<div>
+    <h3>Proposal data</h3>
+    <div class="row">
+        Price: @Model.Price €
+    </div>
+    <div class="row">
+        Departure Date: @Model.DepartureDate
+    </div>
+    <div class="row">
+        Return Date: @Model.ReturnDate
+    </div>
+    <div class="row">
+        Passengers:
+        <ul>
+            @foreach (var passenger in Model.Passengers)
+            {
+                <li>
+                    @passenger.FirstName @passenger.SecondName - @passenger.PassengerType
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<script>
+
+</script>
+
