@@ -4,6 +4,7 @@ using BMT.Customer.Web.ServiceContracts;
 using BMT.Customer.Web.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -39,6 +40,7 @@ namespace BMT.Customer.Web.Controllers
                     proposalDtoList.Add(
                         new ProposalDto
                         {
+                            ProposalId = proposal.ProposalId,
                             OfferId = offer.OfferId,
                             AirlineName = offer.AirlineName,
                             OutboundDate = offer.OutboundDate,
@@ -51,10 +53,22 @@ namespace BMT.Customer.Web.Controllers
                 }
             }
 
+            SetBestPrice(proposalDtoList);
+
             return new ProposalsDto
             {
                 Proposals = proposalDtoList
             };
+        }
+
+        private void SetBestPrice(List<ProposalDto> proposalDtoList)
+        {
+            var disctinctProposals = proposalDtoList.GroupBy(o => o.ProposalId).Select(g => g.First());
+
+            foreach (var disctinctProposal in disctinctProposals)
+            {
+                proposalDtoList.Where(p => p.ProposalId == disctinctProposal.ProposalId).OrderBy(p => p.Price).First().IsAcceptable = true;
+            }
         }
 
         [HttpPost]
@@ -82,8 +96,7 @@ namespace BMT.Customer.Web.Controllers
                     Type = CustomerFormRequestDto.PassengerType
                 },
                 Price = CustomerFormRequestDto.Price,
-                TimeToLive = DateTime.Now.AddDays(20),
-                Status = "PROPOSED"
+                TimeToLive = DateTime.Now.AddDays(20)
             };
         }
     }

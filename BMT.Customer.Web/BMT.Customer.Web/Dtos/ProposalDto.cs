@@ -4,6 +4,7 @@ namespace BMT.Customer.Web.Dtos
 {
     public class ProposalDto
     {
+        public string ProposalId { get; set; }
         public string OfferId { get; set; }
         public string AirlineName { get; set; }
         public string DepartureCity { get; set; }
@@ -11,5 +12,6 @@ namespace BMT.Customer.Web.Dtos
         public DateTime OutboundDate { get; set; }
         public DateTime InboundDate { get; set; }
         public decimal Price { get; set; }
+        public bool IsAcceptable { get; set; }
     }
 }
