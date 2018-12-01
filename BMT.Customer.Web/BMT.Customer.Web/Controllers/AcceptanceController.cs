@@ -3,58 +3,19 @@ using BMT.Customer.Web.Models;
 using BMT.Customer.Web.ServiceContracts;
 using BMT.Customer.Web.Services;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace BMT.Customer.Web.Controllers
 {
-    public class CustomerController : Controller
+    public class AcceptanceController : Controller
     {
         private readonly IProposalService _proposalService = new ProposalService();
 
         public ActionResult Index()
         {
             return View();
-        }
-
-        public async Task<ActionResult> Proposals()
-        {
-            var proposalModel = await _proposalService.GetProposal();
-
-            var proposalsDto = MapProposalDto(proposalModel);
-
-            return View("~/Views/Customer/Proposals.cshtml", proposalsDto);
-        }
-
-        private ProposalsDto MapProposalDto(IEnumerable<ProposalModel> proposalModel)
-        {
-            var proposalDtoList = new List<ProposalDto>();
-
-            foreach (var proposal in proposalModel)
-            {
-                foreach (var offer in proposal.Offers)
-                {
-                    proposalDtoList.Add(
-                        new ProposalDto
-                        {
-                            OfferId = offer.OfferId,
-                            AirlineName = offer.AirlineName,
-                            OutboundDate = offer.OutboundDate,
-                            InboundDate = offer.InboundDate,
-                            DepartureCity = proposal.Origin,
-                            ArrivalCity = proposal.Destiny,
-                            Price = offer.Price
-                        }
-                    );
-                }
-            }
-
-            return new ProposalsDto
-            {
-                Proposals = proposalDtoList
-            };
         }
 
         [HttpPost]

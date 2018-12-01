@@ -1,0 +1,107 @@
+{
+  "travellerName": "John",
+  "proposalId": "JohnSmith-AnnaSmith",
+  "origin": "MAD",
+  "destiny": "HEL",
+  "outboundDate": "2018-12-28",
+  "inboundDate": "2019-01-01",
+  "price": "500.0",
+  "Passenger1": {
+		  "firstName": "John",
+		  "secondName": "Smith",
+		  "passengerType": "ADULT"
+	  },
+  "Passenger2": {
+		  "firstName": "Anna",
+		  "secondName": "Smith",
+		  "passengerType": "ADULT"
+	  },
+  "TimeToLive": "2018-12-20T00:00:00",
+  "Status": "PROPOSED"
+}
+
+------------------------------------------------------
+
+{
+  "travellerName": "Rafael",
+  "proposalId": "RafaelClements-RuthClementsd",
+  "origin": "CPH",
+  "destiny": "MAD",
+  "outboundDate": "2018-12-23",
+  "inboundDate": "2019-01-08",
+  "price": "800.0",
+  "Passenger1": {
+		  "firstName": "Rafael",
+		  "secondName": "Clements",
+		  "passengerType": "ADULT"
+	  },
+  "Passenger2": {
+		  "firstName": "Ruth",
+		  "secondName": "Clements",
+		  "passengerType": "ADULT"
+	  },
+  "Passenger3": {
+		  "firstName": "Rafael Jr",
+		  "secondName": "Clements",
+		  "passengerType": "CHILD"
+	  },
+  "TimeToLive": "2018-12-13T00:00:00",
+  "Status": "PROPOSED"
+}
+
+------------------------------------------------------
+
+{
+  "travellerName": "Scott",
+  "proposalId": "ScottOhler",
+  "origin": "CPH",
+  "destiny": "LON",
+  "outboundDate": "2018-12-10",
+  "inboundDate": "2018-12-13",
+  "price": "150.0",
+  "Passenger1": {
+		  "firstName": "Scott",
+		  "secondName": "Ohler",
+		  "passengerType": "ADULT"
+	  },
+  "TimeToLive": "2018-12-09T00:00:00",
+  "Status": "PROPOSED"
+}
+
+------------------------------------------------------
+
+{
+  "travellerName": "Brie",
+  "proposalId": "BrieBrunault",
+  "origin": "PAR",
+  "destiny": "MAD",
+  "outboundDate": "2018-12-21",
+  "inboundDate": "2018-12-23",
+  "price": "80.0",
+  "Passenger1": {
+		  "firstName": "Brie",
+		  "secondName": "Brunault",
+		  "passengerType": "ADULT"
+	  },
+  "TimeToLive": "2018-12-21T00:00:00",
+  "Status": "PROPOSED"
+}
+
+------------------------------------------------------
+
+{
+  "travellerName": "Royale",
+  "proposalId": "RoyaleGaillard",
+  "origin": "PAR",
+  "destiny": "LON",
+  "outboundDate": "2018-12-13",
+  "inboundDate": "2018-12-16",
+  "price": "100.0",
+  "Passenger1": {
+		  "firstName": "Royale",
+		  "secondName": "Gaillard",
+		  "passengerType": "ADULT"
+	  },
+  "TimeToLive": "2018-12-12T00:00:00",
+  "Status": "PROPOSED"
+}
