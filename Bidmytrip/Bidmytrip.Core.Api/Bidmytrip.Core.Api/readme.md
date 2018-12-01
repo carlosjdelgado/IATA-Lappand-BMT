@@ -1,4 +1,4 @@
-POST PROPOSAL -- http://localhost:7071/api/Proposals
+POST PROPOSAL -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/
 
 {
   "travellerName": "Manolo",
@@ -20,11 +20,11 @@ POST PROPOSAL -- http://localhost:7071/api/Proposals
 }
 
 
-GET PROPOSAL -- http://localhost:7071/api/Proposals
+GET PROPOSAL -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/
 
 
 
-POST OFFER -- http://localhost:7071/api/Proposals/Offers
+POST OFFER -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/Offers
 
 {
   "AirlineName": "Manolo",

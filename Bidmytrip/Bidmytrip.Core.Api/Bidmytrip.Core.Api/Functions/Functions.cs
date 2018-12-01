@@ -14,7 +14,7 @@ namespace Bidmytrip.Core.Api
     {
         [FunctionName("PostProposal")]
         public static IActionResult PostProposal(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "proposals")] ProposalDto proposal,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "proposals")] ProposalDto proposal,
             HttpRequest req, TraceWriter log)
         {
             try
@@ -40,7 +40,7 @@ namespace Bidmytrip.Core.Api
 
         [FunctionName("GetProposals")]
         public static IActionResult GetProposals(
-             [HttpTrigger(AuthorizationLevel.Function, "get", Route = "proposals")] HttpRequest req, 
+             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "proposals")] HttpRequest req, 
              TraceWriter log)
         {
             try
@@ -61,7 +61,7 @@ namespace Bidmytrip.Core.Api
 
         [FunctionName("PostOffer")]
         public static IActionResult PostOffer(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "proposals/offers")] OfferDto offer,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "proposals/offers")] OfferDto offer,
             HttpRequest req, TraceWriter log)
         {
             try
