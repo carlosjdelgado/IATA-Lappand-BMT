@@ -15,6 +15,7 @@ namespace BMT.Airline.Web.Models
         public decimal Price { get; set; }
         public DateTime ExpirationDate { get; set; }
         public bool IsAcceptable { get; set; }   
+        public string Status { get; set; }
         public IEnumerable<PassengerViewModel> Passengers { get; set; }
         public IEnumerable<OfferViewModel> Offers { get; set; }
     }

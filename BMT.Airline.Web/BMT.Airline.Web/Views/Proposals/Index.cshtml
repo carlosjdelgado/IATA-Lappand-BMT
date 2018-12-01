@@ -22,7 +22,8 @@
     <tbody>
         @foreach (var proposal in Model.Proposals)
         {
-            <tr class="@(proposal.IsAcceptable ? "bg-success" : "bg-danger")">
+
+            <tr class="@GetItemClass(proposal.IsAcceptable, proposal.Offers.Count(), proposal.Status)">
                 <td>@proposal.DepartureDate.ToShortDateString()</td>
                 <td>@proposal.ReturnDate.ToShortDateString()</td>
                 <td>@proposal.DepartureCity</td>
@@ -38,6 +39,21 @@
         }
     </tbody>
 </table>
+@functions {
+    public string GetItemClass(bool isAcceptable, int NumberOfOffers, string status)
+    {
+        if (!isAcceptable)
+            return "active";
+
+        if (NumberOfOffers > 0)
+            return "info";
+
+        if (status == "CONFIRMED" || status == "CLOSED")
+            return "success";
+
+        return "warning";
+    }
+}
 
 <script>
     $(document).ready(function () {
