@@ -23,7 +23,6 @@
         @foreach (var proposal in Model.Proposals)
         {
 
-            @*<tr class="@(proposal.IsAcceptable ? "info" : "active")">*@
             <tr class="@GetItemClass(proposal.IsAcceptable, proposal.Offers.Count(), proposal.Status)">
                 <td>@proposal.DepartureDate.ToShortDateString()</td>
                 <td>@proposal.ReturnDate.ToShortDateString()</td>
