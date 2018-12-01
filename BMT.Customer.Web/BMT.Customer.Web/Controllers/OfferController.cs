@@ -27,7 +27,7 @@ namespace BMT.Customer.Web.Controllers
         {
             var offersList = offersDto.Offers.ToList().OrderBy(o => o.Price);
 
-            offersList.FirstOrDefault().SetAsBestPrice();
+            offersList.FirstOrDefault()?.SetAsBestPrice();
 
             offersDto.Offers = offersList;
         }

@@ -13,7 +13,8 @@ namespace BMT.Customer.Web.Controllers
     public class AcceptanceController : Controller
     {
         private IProposalService _proposalService = new ProposalService();
-        
+
+        [HttpGet]
         public async Task<ActionResult> Index(string proposalId, string offerId)
         {
             IEnumerable<ProposalModel> proposals = await _proposalService.GetProposals();
@@ -25,10 +26,18 @@ namespace BMT.Customer.Web.Controllers
             return View("~/Views/Acceptance/Index.cshtml", proposalAcceptanceDto);
         }
 
+        //[HttpPost]
+        //public async Task<ActionResult> ConfirmOffer(ConfirmOfferRequestDto confirmOfferRequestDto)
+        //{
+        //    //await _offerService.PostOffer(offerRequestDto);
+        //    return RedirectToAction("Index", new { ProposalId = offerRequestDto.ProposalId });
+        //}
+
         private ProposalAcceptanceDto MapProposalAcceptanceDto(ProposalModel proposalAcceptance)
         {
             return new ProposalAcceptanceDto
             {
+                ProposalId = proposalAcceptance.ProposalId,
                 TravellerName = proposalAcceptance.TravellerName,
                 OutboundDate = proposalAcceptance.OutboundDate,
                 InboundDate = proposalAcceptance.InboundDate,

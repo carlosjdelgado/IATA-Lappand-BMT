@@ -13,11 +13,11 @@ namespace BMT.Customer.Web.Services
     {
         private const string BidMyTripProposalUrl = "https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/";
 
-        private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient _client = new HttpClient();
 
         public async Task<IEnumerable<ProposalModel>> GetProposals()
         {
-            var response = await client.GetAsync(BidMyTripProposalUrl).ConfigureAwait(false);
+            var response = await _client.GetAsync(BidMyTripProposalUrl).ConfigureAwait(false);
 
             var responseAsJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -33,7 +33,7 @@ namespace BMT.Customer.Web.Services
 
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            return await client.PostAsync(BidMyTripProposalUrl, byteContent);
+            return await _client.PostAsync(BidMyTripProposalUrl, byteContent);
         }
     }
 }
