@@ -26,9 +26,14 @@
                     <input id="price" value="@Model.Price" class="form-control" type="number" name="price" />
                 </div>
 
+                <div class="form-group">
+                    <label for="offerCode">Offer Code:</label>
+                    <input id="offerCode" value="" class="form-control" type="text" name="offerCode" />
+                </div>
+
                 <button type="submit" class="btn btn-primary">Send Offer</button>
                 &nbsp;<span>@Html.ActionLink("Go to Proposals", "Index", "Proposals")</span>
-                
+
             </form>
         </div>
         <div class="col-lg-5">
