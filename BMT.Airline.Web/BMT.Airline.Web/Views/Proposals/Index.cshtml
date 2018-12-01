@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BMT.Airline.Web.Models.ProposalViewModel>
+@{
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Active Proposals</h2>
+
+<table class="table table-hover" id="proposals-table">
+    <thead>
+        <tr>
+            <th>Departure Date</th>
+            <th>Return Date</th>
+            <th>Departure City</th>
+            <th>Arrival City</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var proposal in Model)
+        {
+            <tr class="@(proposal.IsAcceptable ? "bg-success" : "bg-danger")">
+                <td>@proposal.DepartureDate.ToShortDateString()</td>
+                <td>@proposal.ReturnDate.ToShortDateString()</td>
+                <td>@proposal.DepartureCity</td>
+                <td>@proposal.ArrivalCity</td>
+                <td>@proposal.Price</td>
+                <td>
+                    @if (proposal.IsAcceptable)
+                    {
+                        <a>Accept</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#proposals-table').DataTable();
+    });
+</script>
+
