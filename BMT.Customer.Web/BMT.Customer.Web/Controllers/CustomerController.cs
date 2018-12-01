@@ -4,6 +4,7 @@ using BMT.Customer.Web.ServiceContracts;
 using BMT.Customer.Web.Services;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -19,13 +20,11 @@ namespace BMT.Customer.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> SentProposal(CustomerFormDto customerFormDto)
+        public async Task<HttpResponseMessage> SentProposal(CustomerFormDto customerFormDto)
         {
             var proposalModel = MapProposalModel(customerFormDto);
 
-            await _proposalService.SendProposal(proposalModel);
-
-            return View();
+            return await _proposalService.SendProposal(proposalModel);
         }
 
         private ProposalModel MapProposalModel(CustomerFormDto customerFormDto)
@@ -38,13 +37,11 @@ namespace BMT.Customer.Web.Controllers
                 Destiny = customerFormDto.ArrivalCity,
                 OutboundDate = customerFormDto.DepartureDatetime,
                 InboundDate = customerFormDto.ArrivalDatetime,
-                Passengers = new List<PassengerModel>{
-                    new PassengerModel
-                    {
-                        FirstName = customerFormDto.FirstName,
-                        SecondName = customerFormDto.SecondName,
-                        Type = customerFormDto.PassengerType
-                    }
+                Passenger1 = new PassengerModel
+                {
+                    FirstName = customerFormDto.FirstName,
+                    SecondName = customerFormDto.SecondName,
+                    Type = customerFormDto.PassengerType
                 },
                 Price = customerFormDto.Price,
                 TimeToLive = DateTime.Now.AddDays(20),
