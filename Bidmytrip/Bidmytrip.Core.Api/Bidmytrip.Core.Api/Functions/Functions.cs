@@ -5,13 +5,45 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
+using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bidmytrip.Core.Api
 {
     public static class Functions
     {
+        private static string AuthTokenHeader = "X-Authorization";
+
+        [FunctionName("PostProposals")]
+        public static async Task<IActionResult> PostProposals(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "proposals/Bulk")] HttpRequest req, TraceWriter log)
+        {
+            try
+            {
+                var content = await req.ReadAsStringAsync();
+                var deserializedContent = JsonConvert.DeserializeObject<ProposalList>(content);
+
+                if (deserializedContent.Proposals.Any(p => !p.IsValid()))
+                {
+                    return new BadRequestResult();
+                }
+
+                var service = new BlockChainService(log);
+
+                service.PostProposals(deserializedContent.Proposals);
+
+                return new OkResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+
+                throw;
+            }
+        }
+
         [FunctionName("PostProposal")]
         public static IActionResult PostProposal(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "proposals")] ProposalDto proposal,
@@ -24,11 +56,13 @@ namespace Bidmytrip.Core.Api
                     return new BadRequestResult();
                 }
 
+                var authToken = req.Headers.ContainsKey(AuthTokenHeader) ? req.Headers[AuthTokenHeader][0] : string.Empty;
+
                 var service = new BlockChainService(log);
 
-                service.PostProposal(proposal);
+                var newProposal = service.PostProposal(authToken, proposal);
 
-                return (ActionResult)new OkResult();
+                return (ActionResult)new OkObjectResult(newProposal);
             }
             catch(Exception ex)
             {
@@ -45,9 +79,11 @@ namespace Bidmytrip.Core.Api
         {
             try
             {
+                var authToken = req.Headers.ContainsKey(AuthTokenHeader) ? req.Headers[AuthTokenHeader][0] : string.Empty;
+
                 var service = new BlockChainService(log);
 
-                var proposal = service.GetProposals();
+                var proposal = service.GetProposals(authToken);
 
                 return (ActionResult)new OkObjectResult(proposal);
             }
@@ -66,11 +102,13 @@ namespace Bidmytrip.Core.Api
         {
             try
             {
+                var authToken = req.Headers.ContainsKey(AuthTokenHeader) ? req.Headers[AuthTokenHeader][0] : string.Empty;
+
                 var service = new BlockChainService(log);
 
-                service.PostOffer(offer);
+                var modifiedProposal = service.PostOffer(authToken, offer);
 
-                return (ActionResult)new OkResult();
+                return new OkObjectResult(modifiedProposal);
             }
             catch (Exception ex)
             {

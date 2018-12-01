@@ -244,8 +244,14 @@ namespace Bidmytrip.Common.Workbench.Client
 			var result = await getDataObjectFromAPI<ContractCodesReturnType>($"{BaseUrl}applications/{applicationID}/contractCode?ledgerId={ledgerID}");
 			return result?.ContractCodes;
         }
-        
-		public async Task<string> PostContractCodeByApplicationAsync(FileStream contractFile, string contractFileName, string applicationID, int ledgerID)
+
+        public async Task<IEnumerable<ContractCodes>> GetContractCodesByApplicationAsync(string applicationID)
+        {
+            var result = await getDataObjectFromAPI<ContractCodesReturnType>($"{BaseUrl}applications/{applicationID}/contractCode?top=100");
+            return result?.ContractCodes;
+        }
+
+        public async Task<string> PostContractCodeByApplicationAsync(FileStream contractFile, string contractFileName, string applicationID, int ledgerID)
         {
 			var url = $"{BaseUrl}applications/{applicationID}/contractCode?ledgerId={ledgerID}";
 
