@@ -129,6 +129,7 @@
     <Compile Include="Controllers\OfferController.cs" />
     <Compile Include="Controllers\AcceptanceController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Dtos\ConfirmOfferDto.cs" />
     <Compile Include="Dtos\CustomerFormDto.cs" />
     <Compile Include="Dtos\OfferDto.cs" />
     <Compile Include="Dtos\PassengerDto.cs" />

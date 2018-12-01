@@ -23,11 +23,5 @@
         </ul>
     </div>
 
-    <div class="row margin-top">
-        <form id="customerForm" name="customerForm" method="post" action="@Url.Action("ConfirmOffer","Acceptance")>
-            <input type="hidden" value="@Model.ProposalId" name="proposalId" />
-            <button type="submit" class="btn btn-primary">Send Offer / Accept</button>
-            &nbsp;<span>@Html.ActionLink("Go to Proposals", "Index", "Proposals")</span>
-        </form>
-    </div>
+    @Html.ActionLink("Confirm Offer", "ConfirmOffer", "Acceptance", new { proposalId = Model.ProposalId, offerId = Model.OfferId }, null)
 </div>

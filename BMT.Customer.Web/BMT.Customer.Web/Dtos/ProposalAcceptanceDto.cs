@@ -6,6 +6,7 @@ namespace BMT.Customer.Web.Dtos
     public class ProposalAcceptanceDto
     {
         public string ProposalId { get; set; }
+        public string OfferId { get; set; }
         public string TravellerName { get; set; }
         public DateTime OutboundDate { get; set; }
         public DateTime InboundDate { get; set; }

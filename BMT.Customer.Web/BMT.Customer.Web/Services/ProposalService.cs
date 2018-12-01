@@ -33,7 +33,7 @@ namespace BMT.Customer.Web.Services
 
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            return await _client.PostAsync(BidMyTripProposalUrl, byteContent);
+            return await _client.PostAsync(BidMyTripProposalUrl, byteContent).ConfigureAwait(false);
         }
     }
 }
