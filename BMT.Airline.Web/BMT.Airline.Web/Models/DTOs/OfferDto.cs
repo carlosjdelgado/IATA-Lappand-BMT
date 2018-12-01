@@ -7,6 +7,7 @@ namespace BMT.Airline.Web.Models.DTOs
 {
     public class OfferDto
     {
+        public string ProposalId { get; set; }
         public DateTime CreationTime { get; set; }
         public string AirlineName { get; set; }
         public string OfferId { get; set; }

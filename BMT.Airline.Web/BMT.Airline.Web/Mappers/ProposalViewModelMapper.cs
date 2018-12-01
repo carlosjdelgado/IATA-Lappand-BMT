@@ -30,7 +30,8 @@ namespace BMT.Airline.Web.Mappers
                 ExpirationDate = proposalDto.TimeToLive,
                 Price = proposalDto.Price,                
                 IsAcceptable = BuildIsAcceptable(proposalDto, configuration),
-                Passengers = BuildPassengers(proposalDto)
+                Passengers = BuildPassengers(proposalDto),
+                Offers = proposalDto.Offers.Select(OfferViewModelMapper.Map)
             };
         }
 
@@ -59,7 +60,7 @@ namespace BMT.Airline.Web.Mappers
             {
                 FirstName = passenger.FirstName,
                 SecondName = passenger.SecondName,
-                PassengerType = BuilPassengerType(passenger.Type)
+                PassengerType = BuilPassengerType(passenger.PassengerType)
             };
         }
 
