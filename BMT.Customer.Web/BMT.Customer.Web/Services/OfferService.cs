@@ -34,6 +34,7 @@ namespace BMT.Customer.Web.Services
             var buffer = Encoding.UTF8.GetBytes(proposalModelserialized);
             var byteContent = new ByteArrayContent(buffer);
 
+            byteContent.Headers.Add("X-Authorization", _configuration.AuthorizationKey);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             var response = await _client.PostAsync(BidMyTripProposalUrl, byteContent).ConfigureAwait(false);
