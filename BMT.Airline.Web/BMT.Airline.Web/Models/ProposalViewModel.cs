@@ -18,5 +18,16 @@ namespace BMT.Airline.Web.Models
         public string Status { get; set; }
         public IEnumerable<PassengerViewModel> Passengers { get; set; }
         public IEnumerable<OfferViewModel> Offers { get; set; }
+        public bool AllowMoreOffers => BuildAllowMoreOffers();
+
+        private bool BuildAllowMoreOffers()
+        {
+            if (Status == "CONFIRMED" || Status == "CLOSED")
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

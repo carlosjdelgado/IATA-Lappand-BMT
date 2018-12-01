@@ -29,7 +29,8 @@ namespace BMT.Airline.Web.Services
                 Price = offerRequest.Price,
                 InboundDate = offerRequest.ReturnDate,
                 OutboundDate = offerRequest.DepartureDate,
-                ProposalId = offerRequest.ProposalId
+                ProposalId = offerRequest.ProposalId,
+                OfferCode = offerRequest.OfferCode
             };
 
             await _bmtCoreApiService.PostOffer(offerDto).ConfigureAwait(false);
