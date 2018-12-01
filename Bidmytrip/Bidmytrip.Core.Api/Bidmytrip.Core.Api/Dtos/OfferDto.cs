@@ -17,8 +17,6 @@ namespace Bidmytrip.Core.Api.Dtos
         public DateTime OutboundDate { get; set; }
         public DateTime? InboundDate { get; set; }
         public decimal Price { get; set; }
-
-        //https://docs.microsoft.com/en-us/dotnet/api/system.datetime.ticks?view=netframework-4.7.2
         public DateTime CreationTime { get; }
     }
 }
