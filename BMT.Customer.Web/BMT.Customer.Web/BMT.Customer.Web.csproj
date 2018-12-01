@@ -129,6 +129,8 @@
     <Compile Include="Controllers\AcceptanceController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Dtos\CustomerFormDto.cs" />
+    <Compile Include="Dtos\PassengerDto.cs" />
+    <Compile Include="Dtos\ProposalAcceptanceDto.cs" />
     <Compile Include="Dtos\ProposalDto.cs" />
     <Compile Include="Dtos\ProposalsDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -259,6 +261,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Proposals.cshtml" />
+    <Content Include="Views\Acceptance\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
