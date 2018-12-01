@@ -12,7 +12,7 @@ namespace BMT.Customer.Web.Services
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public async Task SendProposal(ProposalModel proposalModel)
+        public async Task<HttpResponseMessage> SendProposal(ProposalModel proposalModel)
         {
             var proposalModelserialized = JsonConvert.SerializeObject(proposalModel);
 
@@ -21,7 +21,7 @@ namespace BMT.Customer.Web.Services
 
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var result = client.PostAsync("https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/", byteContent).Result;
+            return client.PostAsync("https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/", byteContent).Result;
         }
     }
 }

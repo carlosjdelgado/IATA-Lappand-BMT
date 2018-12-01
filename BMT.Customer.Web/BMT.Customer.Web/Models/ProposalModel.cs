@@ -12,7 +12,7 @@ namespace BMT.Customer.Web.Models
         public DateTime OutboundDate { get; set; }
         public DateTime InboundDate { get; set; }
         public int Price { get; set; }
-        public IEnumerable<PassengerModel> Passengers { get; set; }
+        public PassengerModel Passenger1 { get; set; }
         public DateTime TimeToLive { get; set; }
         public string Status { get; set; }
     }
