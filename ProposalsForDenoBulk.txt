@@ -1,4 +1,7 @@
 {
+"Proposals":
+[
+{
   "travellerName": "John",
   "proposalId": "JohnSmith-AnnaSmith",
   "origin": "MAD",
@@ -17,10 +20,7 @@
 		  "passengerType": "ADULT"
 	  },
   "TimeToLive": "2018-12-20T00:00:00",
-}
-
-------------------------------------------------------
-
+},
 {
   "travellerName": "Rafael",
   "proposalId": "RafaelClements-RuthClementsd",
@@ -45,10 +45,7 @@
 		  "passengerType": "CHILD"
 	  },
   "TimeToLive": "2018-12-13T00:00:00",
-}
-
-------------------------------------------------------
-
+},
 {
   "travellerName": "Scott",
   "proposalId": "ScottOhler",
@@ -63,10 +60,8 @@
 		  "passengerType": "ADULT"
 	  },
   "TimeToLive": "2018-12-09T00:00:00",
-}
-
-------------------------------------------------------
-
+  "Status": "PROPOSED"
+},
 {
   "travellerName": "Brie",
   "proposalId": "BrieBrunault",
@@ -81,10 +76,7 @@
 		  "passengerType": "ADULT"
 	  },
   "TimeToLive": "2018-12-21T00:00:00",
-}
-
-------------------------------------------------------
-
+},
 {
   "travellerName": "Royale",
   "proposalId": "RoyaleGaillard",
@@ -99,4 +91,6 @@
 		  "passengerType": "ADULT"
 	  },
   "TimeToLive": "2018-12-12T00:00:00",
+}
+]
 }

@@ -27,7 +27,12 @@ namespace Bidmytrip.Core.Api.Dtos
 
         internal bool IsValid()
         {
-            return true;
+            return
+                !string.IsNullOrEmpty(ProposalId)
+                && Passenger1.IsValid()
+                && (Passenger2 == null || Passenger2.IsValid())
+                && (Passenger3 == null || Passenger3.IsValid())
+                && (Passenger4 == null || Passenger4.IsValid());
         }
     }
 }
