@@ -6,17 +6,26 @@
     <form id="customerForm" name="customerForm" method="post" action="">
         <div class="form-group">
             <label for="firstName">First Name:</label>
-            <input class="form-control" type="text" name="firstName" />
+            <input id="firstName" class="form-control" type="text" name="firstName" />
         </div>
 
         <div class="form-group">
-            <label for="surname">Surname:</label>
-            <input class="form-control" type="text" name="surname" />
+            <label for="secondName">Second Name:</label>
+            <input id="secondName" class="form-control" type="text" name="secondName" />
         </div>
 
         <div class="form-group">
-            <label for="departureCity">City select</label>
-            <select class="form-control" id="departureCity">
+            <label for="passengerType">Tipo de pasajero:</label>
+            <select id="passengerType" class="form-control" >
+                <option selected value="ADT">Adult</option>
+                <option value="CHD">Child</option>
+                <option value="INF">Infant</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="departureCity">Departure City:</label>
+            <select id="departureCity" class="form-control" >
                 <option selected value="Madrid">Madrid</option>
                 <option value="Sevilla">Sevilla</option>
                 <option value="Barcelona">Barcelona</option>
@@ -26,24 +35,30 @@
 
 
         <div class="form-group">
-            <label for="arrivalCity">City select</label>
-            <select class="form-control" id="arrivalCity">
+            <label for="arrivalCity">Arrival City:</label>
+            <select id="arrivalCity" class="form-control" >
                 <option selected value="Madrid">Madrid</option>
                 <option value="Sevilla">Sevilla</option>
                 <option value="Barcelona">Barcelona</option>
-                <option value="Kittilä">Kittilä</option>
+                <option selected value="Kittilä">Kittilä</option>
             </select>
         </div>
 
         <div class="form-group">
-            <label for="departureDatetime">DepartureDatetime:</label>
-            <input class="form-control" type="date" name="departureDatetime" min="2018-12-02" max="2019-12-02" />
+            <label for="departureDatetime">Departure Date:</label>
+            <input id="departureDatetime" class="form-control" type="date" name="departureDatetime" min="2018-12-02" max="2019-12-02" />
         </div>
 
         <div class="form-group">
-            <label for="arrivalDatetime">ArrivalDatetime:</label>
-            <input class="form-control" type="date" name="arrivalDatetime" min="2018-12-02" max="2019-12-02" />
+            <label for="arrivalDatetime">Arrival Date:</label>
+            <input id="arrivalDatetime" class="form-control" type="date" name="arrivalDatetime" min="2018-12-02" max="2019-12-02" />
         </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input id="price" class="form-control" type="number" name="price" />
+        </div>
+
         <button type="submit" class="btn btn-primary">Sent Proposal</button>
     </form>
 </div>
