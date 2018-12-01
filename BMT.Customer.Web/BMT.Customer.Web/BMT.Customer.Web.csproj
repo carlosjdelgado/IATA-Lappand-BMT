@@ -126,15 +126,28 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\OfferController.cs" />
+    <Compile Include="Controllers\AcceptanceController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Dtos\CustomerFormDto.cs" />
+    <Compile Include="Dtos\OfferDto.cs" />
+    <Compile Include="Dtos\PassengerDto.cs" />
+    <Compile Include="Dtos\ProposalAcceptanceDto.cs" />
+    <Compile Include="Dtos\OffersDto.cs" />
+    <Compile Include="Dtos\ProposalDto.cs" />
+    <Compile Include="Dtos\ProposalsDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\OfferDtoMapper.cs" />
+    <Compile Include="Mappers\OffersDtoMapper.cs" />
+    <Compile Include="Models\OfferModel.cs" />
     <Compile Include="Models\PassengerModel.cs" />
     <Compile Include="Models\ProposalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceContracts\IOfferService.cs" />
     <Compile Include="ServiceContracts\IProposalService.cs" />
+    <Compile Include="Services\OfferService.cs" />
     <Compile Include="Services\ProposalService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +267,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Proposals.cshtml" />
+    <Content Include="Views\Acceptance\Index.cshtml" />
+    <Content Include="Views\Customer\Offers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

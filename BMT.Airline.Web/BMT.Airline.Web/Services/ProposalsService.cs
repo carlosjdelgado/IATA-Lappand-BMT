@@ -1,49 +1,44 @@
-﻿using BMT.Airline.Web.Models;
+﻿using BMT.Airline.Web.Mappers;
+using BMT.Airline.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace BMT.Airline.Web.Services
 {
     public class ProposalsService
     {
+        private ConfigurationProvider _configuration;
+        private BMTCoreApiService _bmtCoreApiService;
+
         public ProposalsService()
         {
+            _configuration = new ConfigurationProvider();
+            _bmtCoreApiService = new BMTCoreApiService();
         }
 
-        public IEnumerable<ProposalViewModel> GetActiveProposals()
+        public async Task<ProposalsReportViewModel> GetProposalsReport()
         {
-            return new List<ProposalViewModel>
+            var proposals = await _bmtCoreApiService.GetProposals().ConfigureAwait(false);
+
+            return new ProposalsReportViewModel
             {
-                new ProposalViewModel
-                {
-                    DepartureCity = "MAD",
-                    ArrivalCity = "AMS",
-                    DepartureDate = new DateTime(2018, 12, 10),
-                    ReturnDate = new DateTime(2018,12,20),
-                    Price = 100,
-                    IsAcceptable = true
-                },
-                new ProposalViewModel
-                {
-                    DepartureCity = "MAD",
-                    ArrivalCity = "AMS",
-                    DepartureDate = new DateTime(2018, 12, 12),
-                    ReturnDate = new DateTime(2018,12,18),
-                    Price = 80,
-                    IsAcceptable = false
-                },
-                new ProposalViewModel
-                {
-                    DepartureCity = "MAD",
-                    ArrivalCity = "LON",
-                    DepartureDate = new DateTime(2019, 1, 12),
-                    ReturnDate = new DateTime(2019,1,18),
-                    Price = 300,
-                    IsAcceptable = true
-                }
+                AirlineName = _configuration.AirlineName,
+                Proposals = proposals.Select(p => ProposalViewModelMapper.Map(p, _configuration)) 
             };
-        } 
+        }
+
+        public async Task<ProposalViewModel> GetProposal(string proposalId)
+        {
+            var proposals = await _bmtCoreApiService.GetProposals().ConfigureAwait(false);
+            var proposal = proposals.FirstOrDefault(p => p.ProposalId == proposalId);
+
+            if (proposal == null)
+                return null;
+
+            return ProposalViewModelMapper.Map(proposal, _configuration);
+        }        
     }
 }

@@ -9,7 +9,7 @@ $(document).ready(function () {
         var arrivalDatetime = $('#arrivalDatetime').val();
         var price = $('#price').val();
 
-        var customerFormDto = {
+        var CustomerFormRequestDto = {
             FirstName: firstName,
             SecondName: secondName,
             PassengerType: passengerType,
@@ -23,7 +23,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             url: '/Customer/SentProposal',
-            data: { CustomerFormDto: customerFormDto },
+            data: { CustomerFormRequestDto: CustomerFormRequestDto },
             cache: false,
             success: function (result) {
                 alert("Proposal sended");

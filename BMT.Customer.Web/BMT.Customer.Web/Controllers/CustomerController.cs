@@ -4,6 +4,7 @@ using BMT.Customer.Web.ServiceContracts;
 using BMT.Customer.Web.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -19,33 +20,72 @@ namespace BMT.Customer.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<HttpResponseMessage> SentProposal(CustomerFormDto customerFormDto)
+        [HttpGet]
+        public async Task<ActionResult> Proposals()
         {
-            var proposalModel = MapProposalModel(customerFormDto);
+            var proposalsModel = await _proposalService.GetProposals();
+
+            var disctinctProposals = GetDistinctProposals(proposalsModel);
+
+            var proposalsDto = new ProposalsDto
+            {
+                Proposals = MapProposalDto(disctinctProposals)
+            };
+
+            return View("~/Views/Customer/Proposals.cshtml", proposalsDto);
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> SentProposal(CustomerFormDto CustomerFormRequestDto)
+        {
+            var proposalModel = MapProposalModel(CustomerFormRequestDto);
 
             return await _proposalService.SendProposal(proposalModel);
         }
 
-        private ProposalModel MapProposalModel(CustomerFormDto customerFormDto)
+        private IEnumerable<ProposalDto> MapProposalDto(IEnumerable<ProposalModel> distintictProposals)
+        {
+            var proposalDtoList = new List<ProposalDto>();
+
+            foreach (var distintictProposal in distintictProposals)
+            {
+                proposalDtoList.Add(new ProposalDto
+                {
+                    ProposalId = distintictProposal.ProposalId,
+                    OutboundDate = distintictProposal.OutboundDate,
+                    InboundDate = distintictProposal.InboundDate,
+                    DepartureCity = distintictProposal.Origin,
+                    ArrivalCity = distintictProposal.Destiny,
+                    Price = distintictProposal.Price
+                });
+            }
+
+            return proposalDtoList;
+        }
+
+        private IEnumerable<ProposalModel> GetDistinctProposals(IEnumerable<ProposalModel> proposalsModel)
+        {
+            return proposalsModel.GroupBy(o => o.ProposalId).Select(g => g.First());
+        }
+
+        private ProposalModel MapProposalModel(CustomerFormDto CustomerFormRequestDto)
         {
             return new ProposalModel
             {
                 ProposalId = Guid.NewGuid().ToString(),
-                TravellerName = customerFormDto.FirstName,
-                Origin = customerFormDto.DepartureCity,
-                Destiny = customerFormDto.ArrivalCity,
-                OutboundDate = customerFormDto.DepartureDatetime,
-                InboundDate = customerFormDto.ArrivalDatetime,
+                TravellerName = CustomerFormRequestDto.FirstName,
+                Origin = CustomerFormRequestDto.DepartureCity,
+                Destiny = CustomerFormRequestDto.ArrivalCity,
+                OutboundDate = CustomerFormRequestDto.DepartureDatetime,
+                InboundDate = CustomerFormRequestDto.ArrivalDatetime,
                 Passenger1 = new PassengerModel
                 {
-                    FirstName = customerFormDto.FirstName,
-                    SecondName = customerFormDto.SecondName,
-                    Type = customerFormDto.PassengerType
+                    FirstName = CustomerFormRequestDto.FirstName,
+                    SecondName = CustomerFormRequestDto.SecondName,
+                    Type = CustomerFormRequestDto.PassengerType
                 },
-                Price = customerFormDto.Price,
-                TimeToLive = DateTime.Now.AddDays(20),
-                Status = "PROPOSED"
+                Price = CustomerFormRequestDto.Price,
+                TimeToLive = DateTime.Now.AddDays(20)
             };
         }
     }
