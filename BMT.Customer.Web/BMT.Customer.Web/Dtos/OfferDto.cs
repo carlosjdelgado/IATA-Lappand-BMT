@@ -2,11 +2,9 @@
 
 namespace BMT.Customer.Web.Dtos
 {
-    public class ProposalDto
+    public class OfferDto
     {
-        public string ProposalId { get; set; }
-        public string DepartureCity { get; set; }
-        public string ArrivalCity { get; set; }
+        public string OfferId { get; set; }
         public DateTime OutboundDate { get; set; }
         public DateTime InboundDate { get; set; }
         public decimal Price { get; set; }

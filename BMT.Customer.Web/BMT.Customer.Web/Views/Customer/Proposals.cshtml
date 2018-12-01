@@ -14,17 +14,14 @@
     <tbody>
         @foreach (var proposal in Model.Proposals)
         {
-        <tr class="@( proposal.IsAcceptable ? "bg-success" : "")">
+        <tr>
             <td>@proposal.OutboundDate.ToShortDateString()</td>
             <td>@proposal.InboundDate.ToShortDateString()</td>
             <td>@proposal.DepartureCity</td>
             <td>@proposal.ArrivalCity</td>
             <td>@proposal.Price</td>
             <td>
-                @if (proposal.IsAcceptable)
-                {
-                    @Html.ActionLink("Accept / Offer", "Index", "Acceptance", new { OfferId = proposal.OfferId, ProposalId = proposal.ProposalId }, null)
-                }
+                @Html.ActionLink("Go to Offers", "Index", "Offer", new { ProposalId = proposal.ProposalId }, null)
             </td>
         </tr>
         }
