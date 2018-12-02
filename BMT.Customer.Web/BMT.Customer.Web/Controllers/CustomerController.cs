@@ -66,7 +66,7 @@ namespace BMT.Customer.Web.Controllers
                 });
             }
 
-            return proposalDtoList.OrderBy(p => p.CreationDate);
+            return proposalDtoList.OrderByDescending(p => p.CreationDate);
         }
 
         private IEnumerable<ProposalModel> GetDistinctProposals(IEnumerable<ProposalModel> proposalsModel)
