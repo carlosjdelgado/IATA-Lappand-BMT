@@ -9,6 +9,8 @@ namespace Bidmytrip.Core.Api.Services
 {
     public class BidMyTripService
     {
+        private const bool useWorkBench = false;
+
         private const string Proposed = "PROPOSED";
         private const string Accepted = "ACCEPTED";
         private const string Confirmed = "CONFIRMED";
@@ -41,6 +43,7 @@ namespace Bidmytrip.Core.Api.Services
 
         internal async Task<ProposalDto> PostProposal(string authToken, ProposalDto proposal)
         {
+            proposal.CreationDate = DateTime.UtcNow;
             proposal.Status = Proposed;
 
             var fullDb = await CacheService.GetFullDb();
@@ -49,7 +52,12 @@ namespace Bidmytrip.Core.Api.Services
 
             await CacheService.UpdataDb(fullDb);
 
-            //await _workBenchService.RecordNewProposal(authToken, proposal);
+            if (useWorkBench)
+            {
+                proposal.WorkFlowInfoId = await _workBenchService.RecordNewProposal(authToken, proposal);
+            }
+
+            await CacheService.UpdataDb(fullDb);
 
             return proposal;
         }
@@ -65,6 +73,11 @@ namespace Bidmytrip.Core.Api.Services
 
             await CacheService.UpdataDb(fullDb);
 
+            if (useWorkBench)
+            {
+                await _workBenchService.RecordConfirm(authToken, proposal);
+            }
+
             return proposal;
         }
 
@@ -75,16 +88,28 @@ namespace Bidmytrip.Core.Api.Services
 
         internal async Task<ProposalDto> PostOffer(string authToken, OfferDto offer)
         {
+            var hasBeenAccepted = false;
+
             var fullDb = await CacheService.GetFullDb();
 
             var proposal = fullDb.First(p => p.ProposalId == offer.ProposalId);
             if (proposal.Status == Proposed && IsEqualOrBetter(proposal, offer))
             {
                 proposal.Status = Accepted;
+                hasBeenAccepted = true;
             }
+
+            offer.Selected = false;
+            offer.CreationTime = DateTime.UtcNow;
+
             proposal.Offers.Add(offer);
 
-            await CacheService.UpdataDb(fullDb);
+            await CacheService.UpdataDb(fullDb);  
+            
+            if (hasBeenAccepted && useWorkBench)
+            {
+                await _workBenchService.RecordAcceptance(authToken, proposal);
+            }
 
             return proposal;
         }

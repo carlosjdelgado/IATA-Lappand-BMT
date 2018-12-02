@@ -11,9 +11,9 @@ namespace Bidmytrip.Core.Api.Services
     public class WorkBenchService
     {
         private const string blockChainApiUrl = "https://iagndcblockchain-qqau77-api.azurewebsites.net";
-        private const string defaultAuthToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IndVTG1ZZnNxZFF1V3RWXy1oeFZ0REpKWk00USIsImtpZCI6IndVTG1ZZnNxZFF1V3RWXy1oeFZ0REpKWk00USJ9.eyJhdWQiOiIwYWFjNTA1MC00OTY5LTRkNTctYjkyZC0xNDUyNWRjOGZiNmYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZDEzZTBmMy1hOTllLTQwNjItYTEyNS03NzY3N2RiOTYxMzAvIiwiaWF0IjoxNTQzNjk0MTA2LCJuYmYiOjE1NDM2OTQxMDYsImV4cCI6MTU0MzY5ODAwNiwiYWlvIjoiQVhRQWkvOEpBQUFBWnFMT2lJNFNwTTkvNElHUzFleFd0Rk1tdnhkSzRHQkJ3RVdscm5SZE83ZW9XQ2hXUm93TmluTXQwZUNvLytKSjMzeis1c0xWalJxTzF2QWVmZVliRzBKNGdtdzRyQmQ0MWxSeTMvQWVQa0FJcTExZFRBdHJubk1Xa1ZPenhGRDlJYUZWczBBa2hHTzQwNm4xU2svd3BRPT0iLCJhbXIiOlsicnNhIl0sImNfaGFzaCI6ImdOb0JtZ2JuM0RYRFU0LTBvUnZHUmciLCJlbWFpbCI6ImFsdmFyby5tb250ZXJvQGJpcmNobWFuZ3JvdXAuY29tIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvZTA2MzViYjQtMGJkOC00ZTRjLWFiNTEtMjc3YTExNjNlZDllLyIsImlwYWRkciI6IjE5NC4xMTEuMTE5LjQ1IiwibmFtZSI6IkFsdmFybyBNb250ZXJvIiwibm9uY2UiOiI3ODRmMGZkMy1mMTMyLTQ0MTgtYjY4Yy1kMjg2NTRhMGNjZDQiLCJvaWQiOiI3ZDc5NTFjYy02MGQ1LTQwZjgtOTdlOC01NjhiNTRlNzcwNjQiLCJzdWIiOiJtVzlsTDNPb3pIMlhzRVA1NDNVYkd6TU5TOUlJd3F0YXpOR2NwUlNmUHJBIiwidGlkIjoiNGQxM2UwZjMtYTk5ZS00MDYyLWExMjUtNzc2NzdkYjk2MTMwIiwidW5pcXVlX25hbWUiOiJhbHZhcm8ubW9udGVyb0BiaXJjaG1hbmdyb3VwLmNvbSIsInV0aSI6IkRJY3UtYjdmVkV5bE1Mc3Z1N2R0QUEiLCJ2ZXIiOiIxLjAifQ.NGi_AUp2Xmw8Nee7FKGaSnbht0dtf_pOsvALYvkZJXfY9fDyOw_rOS38hfJ5Y5Mw3AtM6uHCCKQ1WyNCOrtTcwi4N7zuEDsmocG9Ekm5R02ZXP1F720TDVPhCotCtTQB4JI6KJ8DuCay3_42tvIbH5XIzwkq7hfnfmkscSDKjKnLFs2-dYHnr3I8Y63x5A7rY-qKw_yeCBAnOOcLexohUC6fb36OouDHkzGoCcFyrOAGmSqgyRIeAUdrwJUJ0KvQsIkfeNCJkKRt97pVFeGsrlisjRtIFo8MRuFn9m-23LifnScSp5xKcxpT7TAdGCOpKAfonV1cFHVidGpPxOOX3g";
+        private const string defaultAuthToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IndVTG1ZZnNxZFF1V3RWXy1oeFZ0REpKWk00USIsImtpZCI6IndVTG1ZZnNxZFF1V3RWXy1oeFZ0REpKWk00USJ9.eyJhdWQiOiIwYWFjNTA1MC00OTY5LTRkNTctYjkyZC0xNDUyNWRjOGZiNmYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZDEzZTBmMy1hOTllLTQwNjItYTEyNS03NzY3N2RiOTYxMzAvIiwiaWF0IjoxNTQzNzM2NTAwLCJuYmYiOjE1NDM3MzY1MDAsImV4cCI6MTU0Mzc0MDQwMCwiYWlvIjoiNDJSZ1lPaUlDK1JkNzJmRTlqbWxmZTZKMVdiOEY3VWVWbnZYSFN6L3VOZjZ1a2pveGxNQSIsImFtciI6WyJwd2QiXSwiZ2l2ZW5fbmFtZSI6IkZJTk5BSVIiLCJpcGFkZHIiOiIxOTQuMTExLjExOS40NSIsIm5hbWUiOiJGSU5OQUlSIiwibm9uY2UiOiI0YjRiYjMwZS1lNGFhLTQwZjEtODhkNi0zMDE1MGE1MWNiNDIiLCJvaWQiOiIwZmUyY2ZjMi1lYzJiLTRiNjEtOGFmMC1mOTE1YWFjMDczZGMiLCJzdWIiOiJMWV9tMG5fTmo4ZEF1bjM4ckFSX3Jrb3lHRlJNcWNwNzdNQnBxVjR6ZWlNIiwidGlkIjoiNGQxM2UwZjMtYTk5ZS00MDYyLWExMjUtNzc2NzdkYjk2MTMwIiwidW5pcXVlX25hbWUiOiJmaW5uYWlyQGliaXNtYWRyaWQuY29tIiwidXBuIjoiZmlubmFpckBpYmlzbWFkcmlkLmNvbSIsInV0aSI6ImVLbHVIRmVnTlVLZ2tSa0F2V1lDQUEiLCJ2ZXIiOiIxLjAifQ.FBH68lojwLeLsoTlfrsrIyB7qlRh7a_-CH7lNbpUn_aOaJPyT2di-36fp2vAqcsiQe0lfZii3YRgG_PcAWKHzA56aNSQvApZuappYcgjSMRuT0-FGHAlcRSY_8sVmPwbPUulKcoonSjN4Z2NdSzVCG9-tHCKuqYsyOyo7xnpLCOpbJUu65CLxzXRdFOBKhw-3IIxrrPxw1DhFfOq2l-0d95M9O86gWipjqRFshIb9NLrPTvEHH3GFiu4KMSvpkpeOkAzuJqcvG2QpRej1OH3GaeE_eHO3PGhH0iChpubPAlT1i9Xt4TYknaCx_bnaFLX_KXqAW3Aw_pU1eWT_tvJOw";
 
-        private const string BidMyTripAppName = "BitMytripV1.1";
+        private const string BidMyTripAppName = "BidMytripV1.2";
         private const string ProposalFlowName = "ProposalFlow";
 
         private GatewayApi _apiGateway;
@@ -26,7 +26,7 @@ namespace Bidmytrip.Core.Api.Services
             };
         }
 
-        internal async Task RecordNewProposal(string authToken, ProposalDto proposal)
+        internal async Task<long> RecordNewProposal(string authToken, ProposalDto proposal)
         {
             InitializeGatewayInstance(authToken);
 
@@ -34,13 +34,14 @@ namespace Bidmytrip.Core.Api.Services
             var workFlow = await GetWorkFlow();
 
             var workFlowInfoId = await GetNextWorkflowInfoId(workFlow.Id.ToString());
-
             var action = BuildNewProposalAction(workFlowInfoId, proposal);
 
             var result = await _apiGateway.CreateNewContractAsync(action,
                 workFlow.Id.ToString(),
                 contract.ContractCodeId.ToString(),
                 contract.LedgerId.ToString());
+
+            return workFlowInfoId;
         }
 
         internal async Task RecordAcceptance(string authToken, ProposalDto proposal)
@@ -50,14 +51,12 @@ namespace Bidmytrip.Core.Api.Services
             var contract = await GetContract();
             var workFlow = await GetWorkFlow();
 
-            var workFlowInfoId = await GetNextWorkflowInfoId(workFlow.Id.ToString());
+            //var workFlowInfoId = await GetNextWorkflowInfoId(workFlow.Id.ToString());
+            //var action = BuildAcceptanceAction(workFlowInfoId, proposal);
+            var action = BuildAcceptanceAction(proposal.WorkFlowInfoId, proposal);
 
-            var action = BuildNewProposalAction(workFlowInfoId, proposal);
-
-            var result = await _apiGateway.CreateNewContractAsync(action,
-                workFlow.Id.ToString(),
-                contract.ContractCodeId.ToString(),
-                contract.LedgerId.ToString());
+            var result = await _apiGateway.PostWorkflowActionAsync(action,
+                contract.ContractCodeId.ToString());
         }
 
         internal async Task RecordConfirm(string authToken, ProposalDto proposal)
@@ -68,13 +67,10 @@ namespace Bidmytrip.Core.Api.Services
             var workFlow = await GetWorkFlow();
 
             var workFlowInfoId = await GetNextWorkflowInfoId(workFlow.Id.ToString());
+            var action = BuildConfirmationAction(workFlowInfoId, proposal);
 
-            var action = BuildNewProposalAction(workFlowInfoId, proposal);
-
-            var result = await _apiGateway.CreateNewContractAsync(action,
-                workFlow.Id.ToString(),
-                contract.ContractCodeId.ToString(),
-                contract.LedgerId.ToString());
+            var result = await _apiGateway.PostWorkflowActionAsync(action,
+                contract.ContractCodeId.ToString());
         }
 
         private static ActionInformation BuildNewProposalAction(long workFlowInfoId, ProposalDto proposal)
@@ -114,6 +110,33 @@ namespace Bidmytrip.Core.Api.Services
                         Name = "timeToLive",
                         Value = ((int)Math.Ceiling((proposal.TimeToLive - DateTime.UtcNow).TotalHours)).ToString()
                     }
+                }
+            };
+        }
+
+        private static ActionInformation BuildAcceptanceAction(long workFlowInfoId, ProposalDto proposal)
+        {
+            return new ActionInformation()
+            {
+                WorkflowFunctionId = workFlowInfoId,
+                WorkflowActionParameters = new List<WorkflowActionParameter>()
+                {
+                    new WorkflowActionParameter()
+                    {
+                        Name = "offerCode",
+                        Value = proposal.Offers.First().OfferCode
+                    }
+                }
+            };
+        }
+
+        private static ActionInformation BuildConfirmationAction(long workFlowInfoId, ProposalDto proposal)
+        {
+            return new ActionInformation()
+            {
+                WorkflowFunctionId = workFlowInfoId,
+                WorkflowActionParameters = new List<WorkflowActionParameter>()
+                {
                 }
             };
         }

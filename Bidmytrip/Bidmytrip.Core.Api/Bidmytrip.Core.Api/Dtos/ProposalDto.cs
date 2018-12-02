@@ -13,6 +13,7 @@ namespace Bidmytrip.Core.Api.Dtos
         public DateTime OutboundDate { get; set; }
         public DateTime? InboundDate { get; set; }
         public decimal Price { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public PassengerDto Passenger1 { get; set; }
         public PassengerDto Passenger2 { get; set; }
@@ -24,6 +25,8 @@ namespace Bidmytrip.Core.Api.Dtos
         public string Status { get; set; } // PROPOSED / ACCEPTED / CONFIRMED / CLOSED
 
         public IList<OfferDto> Offers { get; set; } = new List<OfferDto>();
+
+        public long WorkFlowInfoId { get; internal set; }
 
         internal bool IsValid()
         {
