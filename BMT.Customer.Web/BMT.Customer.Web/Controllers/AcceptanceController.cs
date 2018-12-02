@@ -36,7 +36,7 @@ namespace BMT.Customer.Web.Controllers
             };
 
             await _offerService.ConfirmOffer(confirmOfferDto);
-            return RedirectToAction("Proposals", "CustomerProposals");
+            return RedirectToAction("Proposals", "Customer");
         }
 
         private ProposalAcceptanceDto MapProposalAcceptanceDto(ProposalModel proposalAcceptance)
