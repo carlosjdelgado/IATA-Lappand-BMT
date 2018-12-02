@@ -30,11 +30,17 @@ namespace BMT.Airline.Web.Mappers
                 ExpirationDate = proposalDto.TimeToLive,
                 Price = proposalDto.Price,                
                 IsAcceptable = BuildIsAcceptable(proposalDto, configuration),
+                IsInteresting = BuildIsInteresting(proposalDto, configuration),
                 Passengers = BuildPassengers(proposalDto),
                 Offers = proposalDto.Offers.Select(OfferViewModelMapper.Map),
                 Status = proposalDto.Status,
                 AirlineLogo = configuration.AirlineLogo
             };
+        }
+
+        private static bool BuildIsInteresting(ProposalDto proposalDto, ConfigurationProvider configuration)
+        {
+            return proposalDto.Price >= configuration.MinimumInterestingPrice;
         }
 
         private static IEnumerable<PassengerViewModel> BuildPassengers(ProposalDto proposalDto)

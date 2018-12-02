@@ -14,7 +14,8 @@ namespace BMT.Airline.Web.Models
         public string ArrivalCity { get; set; }
         public decimal Price { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public bool IsAcceptable { get; set; }   
+        public bool IsAcceptable { get; set; } 
+        public bool IsInteresting { get; set; }
         public string Status { get; set; }
         public string AirlineLogo { get; set; }
         public IEnumerable<PassengerViewModel> Passengers { get; set; }

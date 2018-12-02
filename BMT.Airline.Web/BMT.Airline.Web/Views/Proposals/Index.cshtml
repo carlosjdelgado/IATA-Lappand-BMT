@@ -24,7 +24,7 @@
         @foreach (var proposal in Model.Proposals)
         {
 
-            <tr class="@GetItemClass(proposal.IsAcceptable, proposal.Offers.Count(), proposal.Status)">
+            <tr class="@GetItemClass(proposal.IsAcceptable, proposal.Offers.Count(), proposal.Status) @(proposal.IsInteresting?"font-weight-bold":"")">
                 <td>@proposal.DepartureDate.ToShortDateString()</td>
                 <td>@proposal.ReturnDate.ToShortDateString()</td>
                 <td>@proposal.DepartureCity</td>
