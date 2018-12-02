@@ -11,5 +11,6 @@ namespace BMT.Customer.Web.Models
         public DateTime InboundDate { get; set; }
         public DateTime CreationTime { get; set; }
         public decimal Price { get; set; }
+        public bool Selected { get; set; }
     }
 }

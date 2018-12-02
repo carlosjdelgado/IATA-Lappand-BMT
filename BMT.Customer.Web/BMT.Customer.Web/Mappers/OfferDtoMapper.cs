@@ -12,7 +12,8 @@ namespace BMT.Customer.Web.Mappers
                 OfferId = offerModel.OfferId,
                 OutboundDate = offerModel.OutboundDate,
                 InboundDate = offerModel.InboundDate,
-                Price = offerModel.Price
+                Price = offerModel.Price,
+                Selected = offerModel.Selected
             };
         }
     }

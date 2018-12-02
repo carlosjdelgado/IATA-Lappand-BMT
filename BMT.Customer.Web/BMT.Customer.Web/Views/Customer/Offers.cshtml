@@ -14,19 +14,28 @@
     <tbody>
         @foreach (var offer in Model.Offers)
         {
-        <tr>
-            <td>@offer.OutboundDate.ToShortDateString()</td>
-            <td>@offer.InboundDate.ToShortDateString()</td>
-            <td>@Model.DepartureCity</td>
-            <td>@Model.ArrivalCity</td>
-            <td>@offer.Price</td>
-            <td>
-                @if (offer.IsBestPrice)
-                {
-                    @Html.ActionLink("Accept / Offer", "Index", "Acceptance", new { ProposalId = Model.ProposalId, OfferId = offer.OfferId }, null)
-                }
-            </td>
-        </tr>
+            <tr class="@GetItemClass(offer.Selected)" >
+                <td>@offer.OutboundDate.ToShortDateString()</td>
+                <td>@offer.InboundDate.ToShortDateString()</td>
+                <td>@Model.DepartureCity</td>
+                <td>@Model.ArrivalCity</td>
+                <td>@offer.Price</td>
+                <td>
+                    @if (offer.IsBestPrice && !offer.Selected)
+                    {
+                        @Html.ActionLink("Accept / Offer", "Index", "Acceptance", new { ProposalId = Model.ProposalId, OfferId = offer.OfferId }, null)
+                    }
+                </td>
+            </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+    @functions {
+        public string GetItemClass(bool selected)
+        {
+            if (selected)
+                return "bg-yellow";
+
+            return "";
+        }
+    }
