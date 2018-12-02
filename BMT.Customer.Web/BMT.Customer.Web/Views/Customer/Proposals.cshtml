@@ -2,7 +2,7 @@
 
 
 <div>
-    @Html.ActionLink("Create New Proposal", "Index", "Customer")
+    @Html.ActionLink("Create New Proposal", "Index", "Customer", new { @class = "btn btn-primary" })
 </div>
 
 <table class="table table-hover" id="proposals-table">
@@ -39,7 +39,7 @@
                         @Html.ActionLink("Go to Offers", "Index", "Offer", new { ProposalId = proposal.ProposalId }, null)
                     }
                 }
-            </td>
+                    </td>
         </tr>
         }
     </tbody>
