@@ -48,7 +48,7 @@ namespace BMT.Airline.Web.Services
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             byteContent.Headers.Add("X-Authorization", _configurationProvider.AuthorizationKey);
 
-            await _httpClient.PostAsync(BmtPostOffersApiUrl, byteContent);
+            await _httpClient.PostAsync(BmtPostOffersApiUrl, byteContent).ConfigureAwait(false);
         }
     }
 }

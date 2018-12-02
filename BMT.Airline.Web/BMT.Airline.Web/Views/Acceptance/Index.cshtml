@@ -4,33 +4,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Make an offer</h2>
+@if (Model.AllowMoreOffers)
+{
+    <h2>Make an offer</h2>
+}
+else
+{
+    <h2>Proposal Details</h2>
+}
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-5">
-            <form id="customerForm" name="customerForm" method="post" action="@Url.Action("PostOffer","Acceptance")">
-                <input type="hidden" value="@Model.ProposalId" name="proposalId" />
-                <div class="form-group">
-                    <label for="departureDatetime">Departure Date:</label>
-                    <input id="departureDatetime" value="@Model.DepartureDate.ToString("yyyy-MM-dd")" class="form-control" type="date" name="departureDate" />
-                </div>
+        @if (Model.AllowMoreOffers)
+        {
+            <div class="col-lg-5">
+                <form id="customerForm" name="customerForm" method="post" action="@Url.Action("PostOffer", "Acceptance")">
+                    <input type="hidden" value="@Model.ProposalId" name="proposalId" />
+                    <div class="form-group">
+                        <label for="departureDatetime">Departure Date:</label>
+                        <input id="departureDatetime" value="@Model.DepartureDate.ToString("yyyy-MM-dd")" class="form-control" type="date" name="departureDate" />
+                    </div>
 
-                <div class="form-group">
-                    <label for="arrivalDatetime">Return Date:</label>
-                    <input id="arrivalDatetime" value="@Model.ReturnDate.ToString("yyyy-MM-dd")" class="form-control" type="date" name="returnDate" />
-                </div>
+                    <div class="form-group">
+                        <label for="arrivalDatetime">Return Date:</label>
+                        <input id="arrivalDatetime" value="@Model.ReturnDate.ToString("yyyy-MM-dd")" class="form-control" type="date" name="returnDate" />
+                    </div>
 
-                <div class="form-group">
-                    <label for="price">Price:</label>
-                    <input id="price" value="@Model.Price" class="form-control" type="number" name="price" />
-                </div>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input id="price" value="@Model.Price" class="form-control" type="number" name="price" />
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Send Offer</button>
-                &nbsp;<span>@Html.ActionLink("Go to Proposals", "Index", "Proposals")</span>
-                
-            </form>
-        </div>
+                    <div class="form-group">
+                        <label for="offerCode">Offer Code:</label>
+                        <input id="offerCode" value="" class="form-control" type="text" name="offerCode" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send Offer</button>
+                    &nbsp;<span>@Html.ActionLink("Go to Proposals", "Index", "Proposals")</span>
+
+                </form>
+            </div>
+        }
         <div class="col-lg-5">
             <div class="row">
                 <br />
@@ -74,7 +89,7 @@
             <tbody>
                 @foreach (var offer in Model.Offers)
                 {
-                    <tr>
+                    <tr class="@(offer.Selected ? "success": "")">
                         <td>@offer.CreationTime</td>
                         <td>@offer.AirlineName</td>
                         <td>@offer.DepartureDate.ToShortDateString()</td>
@@ -82,7 +97,7 @@
                         <td>@offer.Price</td>
                     </tr>
                 }
-            </tbody>
+                </tbody>
         </table>
 
     </div>

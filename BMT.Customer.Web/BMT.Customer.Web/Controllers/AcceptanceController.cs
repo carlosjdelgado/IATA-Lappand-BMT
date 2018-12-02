@@ -13,7 +13,9 @@ namespace BMT.Customer.Web.Controllers
     public class AcceptanceController : Controller
     {
         private IProposalService _proposalService = new ProposalService();
-        
+        private IOfferService _offerService = new OfferService();
+
+        [HttpGet]
         public async Task<ActionResult> Index(string proposalId, string offerId)
         {
             IEnumerable<ProposalModel> proposals = await _proposalService.GetProposals();
@@ -24,17 +26,36 @@ namespace BMT.Customer.Web.Controllers
 
             return View("~/Views/Acceptance/Index.cshtml", proposalAcceptanceDto);
         }
+        
+        public async Task<ActionResult> ConfirmOffer(string proposalId, string offerId)
+        {
+            var confirmOfferDto = new ConfirmOfferDto
+            {
+                ProposalId = proposalId,
+                OfferId = offerId
+            };
+
+            await _offerService.ConfirmOffer(confirmOfferDto);
+            return RedirectToAction("Proposals", "CustomerProposals");
+        }
 
         private ProposalAcceptanceDto MapProposalAcceptanceDto(ProposalModel proposalAcceptance)
         {
             return new ProposalAcceptanceDto
             {
+                ProposalId = proposalAcceptance.ProposalId,
+                OfferId = BuildOfferId(proposalAcceptance.Offers),
                 TravellerName = proposalAcceptance.TravellerName,
                 OutboundDate = proposalAcceptance.OutboundDate,
                 InboundDate = proposalAcceptance.InboundDate,
                 Price = BuildBestOfferPrice(proposalAcceptance.Offers),
                 Passengers = BuildPassengers(proposalAcceptance)
             };
+        }
+
+        private string BuildOfferId(IEnumerable<OfferModel> offers)
+        {
+            return offers.OrderBy(o => o.Price).FirstOrDefault()?.OfferId;
         }
 
         private decimal BuildBestOfferPrice(IEnumerable<OfferModel> offers)
@@ -72,7 +93,7 @@ namespace BMT.Customer.Web.Controllers
             {
                 FirstName = passenger.FirstName,
                 SecondName = passenger.SecondName,
-                PassengerType = passenger.Type
+                PassengerType = passenger.PassengerType
             };
         }
     }

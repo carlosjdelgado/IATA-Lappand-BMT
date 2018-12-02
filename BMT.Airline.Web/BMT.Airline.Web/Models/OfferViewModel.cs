@@ -12,5 +12,6 @@ namespace BMT.Airline.Web.Models
         public DateTime DepartureDate { get; set; }
         public DateTime ReturnDate { get; set; }
         public decimal Price { get; set; }
+        public bool Selected { get; set; }
     }
 }
