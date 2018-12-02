@@ -8,26 +8,29 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-expand-lg bg-primary fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Bid My Trip", "Index", "Customer", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="container row">
+                <div class="d-flex justify-content-start col">
+                    @Html.Raw($"<span class='header-icon'>{File.ReadAllText(Server.MapPath("~/Content/img/bidmytrip.svg"))}</span>")
+                    <span class="ml-3 text-white">Bid My Trip</span>
+                </div>
+                <div class="d-flex justify-content-end col">
+                    <a href="#">
+                        @Html.Raw($"<span class='header-icon'>{File.ReadAllText(Server.MapPath("~/Content/img/menu.svg"))}</span>")
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Bid My Trip App</p>
-        </footer>
+    <div class="wrapper">
+        <div class="container">
+            <div class="section">
+                @RenderBody()
+                <hr />
+            </div>
+        </div>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="http://malsup.github.com/jquery.form.js"></script>
