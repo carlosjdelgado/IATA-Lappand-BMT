@@ -40,7 +40,7 @@ namespace BMT.Customer.Web.Controllers
         {
             var proposalModel = MapProposalModel(CustomerFormRequestDto);
 
-            await _proposalService.SendProposal(proposalModel);
+            var response = await _proposalService.SendProposal(proposalModel);
 
             return RedirectToAction("Proposals", "Customer");
         }
@@ -58,7 +58,9 @@ namespace BMT.Customer.Web.Controllers
                     InboundDate = distintictProposal.InboundDate,
                     DepartureCity = distintictProposal.Origin,
                     ArrivalCity = distintictProposal.Destiny,
-                    Price = distintictProposal.Price
+                    Price = distintictProposal.Price,
+                    Status = distintictProposal.Status,
+                    HasOffers = distintictProposal.Offers.Count() > 0
                 });
             }
 

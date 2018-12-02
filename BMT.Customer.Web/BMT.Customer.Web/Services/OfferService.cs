@@ -37,7 +37,7 @@ namespace BMT.Customer.Web.Services
             byteContent.Headers.Add("X-Authorization", _configuration.AuthorizationKey);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var response = await _client.PostAsync(BidMyTripProposalUrl, byteContent).ConfigureAwait(false);
+            var response = await _client.PostAsync(BidMyTripConfirmProposalUrl, byteContent).ConfigureAwait(false);
         }
     }
 }

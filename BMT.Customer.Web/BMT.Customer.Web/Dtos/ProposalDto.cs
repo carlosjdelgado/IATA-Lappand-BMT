@@ -10,5 +10,7 @@ namespace BMT.Customer.Web.Dtos
         public DateTime OutboundDate { get; set; }
         public DateTime InboundDate { get; set; }
         public decimal Price { get; set; }
+        public bool HasOffers { get; set; }
+        public string Status { get; set; }
     }
 }
