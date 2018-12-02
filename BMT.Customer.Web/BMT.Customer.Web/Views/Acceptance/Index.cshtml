@@ -23,5 +23,5 @@
         </ul>
     </div>
 
-    @Html.ActionLink("Confirm Offer", "ConfirmOffer", "Acceptance", new { proposalId = Model.ProposalId, offerId = Model.OfferId }, null)
+    @Html.ActionLink("Confirm Offer", "ConfirmOffer", "Acceptance", new { proposalId = Model.ProposalId, offerId = Model.OfferId }, new { @class="btn btn-primary btn-sm"} )
 </div>

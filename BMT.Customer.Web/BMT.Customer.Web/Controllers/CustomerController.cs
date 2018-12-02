@@ -60,11 +60,13 @@ namespace BMT.Customer.Web.Controllers
                     ArrivalCity = distintictProposal.Destiny,
                     Price = distintictProposal.Price,
                     Status = distintictProposal.Status,
-                    HasOffers = distintictProposal.Offers.Count() > 0
+                    HasOffers = distintictProposal.Offers.Count() > 0,
+                    TravellerName = distintictProposal.TravellerName,
+                    CreationDate = distintictProposal.CreationDate
                 });
             }
 
-            return proposalDtoList;
+            return proposalDtoList.OrderByDescending(p => p.CreationDate);
         }
 
         private IEnumerable<ProposalModel> GetDistinctProposals(IEnumerable<ProposalModel> proposalsModel)
