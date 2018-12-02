@@ -17,7 +17,7 @@ else
     <div class="row">
         @if (Model.AllowMoreOffers)
         {
-            <div class="col-lg-5">
+            <div class="col-sm-4">
                 <form id="customerForm" name="customerForm" method="post" action="@Url.Action("PostOffer", "Acceptance")">
                     <input type="hidden" value="@Model.ProposalId" name="proposalId" />
                     <div class="form-group">
@@ -46,30 +46,37 @@ else
                 </form>
             </div>
         }
-        <div class="col-lg-5">
+        <div class="col-sm-8">
             <div class="row">
-                <br />
-                <br />
-                <div class="row">
-                    Proposed Price: @Model.Price €
-                </div>
-                <div class="row">
-                    Departure Date: @Model.DepartureDate.ToShortDateString()
-                </div>
-                <div class="row">
-                    Return Date: @Model.ReturnDate.ToShortDateString()
-                </div>
-                <div class="row">
-                    Passengers:
-                    <ul>
-                        @foreach (var passenger in Model.Passengers)
-                        {
-                            <li>
-                                @passenger.FirstName @passenger.SecondName - @passenger.PassengerType
-                            </li>
-                        }
-                    </ul>
-                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Proposed Price:</td>
+                            <td>@Model.Price €</td>
+                        </tr>
+                        <tr>
+                            <td>Departure Date:</td>
+                            <td>@Model.DepartureDate.ToShortDateString()</td>
+                        </tr>
+                        <tr>
+                            <td>Return Date:</td>
+                            <td>@Model.ReturnDate.ToShortDateString()</td>
+                        </tr>
+                        <tr>
+                            <td>Passengers:</td>
+                            <td>
+                                <ul class="list-group  list-group-flush">
+                                    @foreach (var passenger in Model.Passengers)
+                                    {
+                                        <li class="list-group-item">
+                                            @passenger.FirstName @passenger.SecondName - @passenger.PassengerType
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -97,7 +104,7 @@ else
                         <td>@offer.Price</td>
                     </tr>
                 }
-                </tbody>
+            </tbody>
         </table>
 
     </div>
