@@ -13,5 +13,6 @@ namespace BMT.Customer.Web.Dtos
         public bool HasOffers { get; set; }
         public string Status { get; set; }
         public string TravellerName { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

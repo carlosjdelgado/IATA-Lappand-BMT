@@ -61,11 +61,12 @@ namespace BMT.Customer.Web.Controllers
                     Price = distintictProposal.Price,
                     Status = distintictProposal.Status,
                     HasOffers = distintictProposal.Offers.Count() > 0,
-                    TravellerName = distintictProposal.TravellerName
+                    TravellerName = distintictProposal.TravellerName,
+                    CreationDate = distintictProposal.CreationDate
                 });
             }
 
-            return proposalDtoList;
+            return proposalDtoList.OrderBy(p => p.CreationDate);
         }
 
         private IEnumerable<ProposalModel> GetDistinctProposals(IEnumerable<ProposalModel> proposalsModel)
