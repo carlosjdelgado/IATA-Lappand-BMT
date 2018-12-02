@@ -82,7 +82,7 @@ namespace BMT.Customer.Web.Controllers
                 {
                     FirstName = CustomerFormRequestDto.FirstName,
                     SecondName = CustomerFormRequestDto.SecondName,
-                    Type = CustomerFormRequestDto.PassengerType
+                    PassengerType = CustomerFormRequestDto.PassengerType
                 },
                 Price = CustomerFormRequestDto.Price,
                 TimeToLive = DateTime.Now.AddDays(20)

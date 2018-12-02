@@ -93,7 +93,7 @@ namespace BMT.Customer.Web.Controllers
             {
                 FirstName = passenger.FirstName,
                 SecondName = passenger.SecondName,
-                PassengerType = passenger.Type
+                PassengerType = passenger.PassengerType
             };
         }
     }
