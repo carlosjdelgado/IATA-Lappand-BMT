@@ -14,7 +14,7 @@ namespace Bidmytrip.Core.Api
 {
     public static class Functions
     {
-        private static string AuthTokenHeader = "X-Authorization";
+        private static readonly string AuthTokenHeader = "X-Authorization";
 
         [FunctionName("PostProposals")]
         public static async Task<IActionResult> PostProposals(
