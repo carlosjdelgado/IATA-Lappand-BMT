@@ -40,7 +40,7 @@ namespace BMT.Customer.Web.Controllers
         {
             var proposalModel = MapProposalModel(CustomerFormRequestDto);
 
-            await _proposalService.SendProposal(proposalModel);
+            var response = await _proposalService.SendProposal(proposalModel);
 
             return RedirectToAction("Proposals", "Customer");
         }
