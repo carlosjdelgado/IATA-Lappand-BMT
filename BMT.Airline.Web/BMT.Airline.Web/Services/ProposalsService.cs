@@ -26,6 +26,7 @@ namespace BMT.Airline.Web.Services
             return new ProposalsReportViewModel
             {
                 AirlineName = _configuration.AirlineName,
+                AirlineLogo = _configuration.AirlineLogo,
                 Proposals = proposals.Select(p => ProposalViewModelMapper.Map(p, _configuration)) 
             };
         }

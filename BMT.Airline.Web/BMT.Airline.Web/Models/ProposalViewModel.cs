@@ -16,6 +16,7 @@ namespace BMT.Airline.Web.Models
         public DateTime ExpirationDate { get; set; }
         public bool IsAcceptable { get; set; }   
         public string Status { get; set; }
+        public string AirlineLogo { get; set; }
         public IEnumerable<PassengerViewModel> Passengers { get; set; }
         public IEnumerable<OfferViewModel> Offers { get; set; }
         public bool AllowMoreOffers => BuildAllowMoreOffers();
