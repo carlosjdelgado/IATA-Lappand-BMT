@@ -1,5 +1,6 @@
 ﻿using Bidmytrip.Core.Api.Dtos;
 using Microsoft.Azure.WebJobs.Host;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,65 +21,77 @@ namespace Bidmytrip.Core.Api.Services
             _workBenchService = workBenchService;
         }
 
-        internal void PostProposals(IEnumerable<ProposalDto> proposals)
+        internal async Task PostProposals(IEnumerable<ProposalDto> proposals)
         {
             var proposalList = proposals.ToList();
 
-            foreach(var p in proposalList)
-            {
-                p.Status = Proposed;
-            }
+            var fullDb = await CacheService.GetFullDb();
 
             foreach (var p in proposalList)
             {
-                CacheService.Proposals.Add(p);
+                p.Status = Proposed;
+            }            
+            foreach (var p in proposalList)
+            {
+                fullDb.Add(p);
             }
+
+            await CacheService.UpdataDb(fullDb);
         }
 
         internal async Task<ProposalDto> PostProposal(string authToken, ProposalDto proposal)
         {
             proposal.Status = Proposed;
 
-            CacheService.Proposals.Add(proposal);
+            var fullDb = await CacheService.GetFullDb();
+
+            fullDb.Add(proposal);
+
+            await CacheService.UpdataDb(fullDb);
 
             //await _workBenchService.RecordNewProposal(authToken, proposal);
 
             return proposal;
         }
 
-        internal ProposalDto ConfirmProposal(string authToken, ProposalConfirmedDto proposalConfirmedDto)
+        internal async Task<ProposalDto> ConfirmProposal(string authToken, ProposalConfirmedDto proposalConfirmedDto)
         {
-            var proposal = CacheService.Proposals
-                .First(p => p.ProposalId == proposalConfirmedDto.ProposalId);
+            var fullDb = await CacheService.GetFullDb();
 
+            var proposal = fullDb.First(p => p.ProposalId == proposalConfirmedDto.ProposalId);
             proposal.Status = Confirmed;
-
             var offer = proposal.Offers.First(o => o.OfferId == proposalConfirmedDto.OfferId);
-
             offer.Selected = true;
 
-            proposal.Offers.Add(offer);
+            await CacheService.UpdataDb(fullDb);
 
             return proposal;
         }
 
-        internal IEnumerable<ProposalDto> GetProposals(string authToken)
+        internal async Task<IEnumerable<ProposalDto>> GetProposals(string authToken)
         {
-            return CacheService.Proposals;
+            return await CacheService.GetFullDb();
         }
 
-        internal ProposalDto PostOffer(string authToken, OfferDto offer)
+        internal async Task<ProposalDto> PostOffer(string authToken, OfferDto offer)
         {
-            var proposal = CacheService.Proposals.First(p => p.ProposalId == offer.ProposalId);
+            var fullDb = await CacheService.GetFullDb();
 
+            var proposal = fullDb.First(p => p.ProposalId == offer.ProposalId);
             if (proposal.Status == Proposed && IsEqualOrBetter(proposal, offer))
             {
                 proposal.Status = Accepted;
             }
-
             proposal.Offers.Add(offer);
 
+            await CacheService.UpdataDb(fullDb);
+
             return proposal;
+        }
+
+        internal async Task CleanAllProposals(string authToken)
+        {
+            await CacheService.UpdataDb(new List<ProposalDto>());
         }
 
         private bool IsEqualOrBetter(ProposalDto proposal, OfferDto offer)
@@ -86,6 +99,6 @@ namespace Bidmytrip.Core.Api.Services
             return offer.OutboundDate == proposal.OutboundDate
                 && offer.InboundDate == proposal.InboundDate
                 && offer.Price <= proposal.Price;
-        }       
+        }        
     }
 }

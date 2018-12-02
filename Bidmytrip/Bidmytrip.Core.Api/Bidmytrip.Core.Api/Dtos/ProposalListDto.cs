@@ -2,7 +2,7 @@
 
 namespace Bidmytrip.Core.Api.Dtos
 {
-    public class ProposalList
+    public class ProposalListDto
     {
         public IEnumerable<ProposalDto> Proposals { get; set; }
     }

@@ -43,7 +43,7 @@ POST PROPOSAL CONFIRM -- https://bidmytripcoreapiv1.azurewebsites.net/api/Propos
 
 GET PROPOSAL -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/
 
-
+CLEAN ALL PROPOSAL -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/CleanAll
 
 POST OFFER -- https://bidmytripcoreapiv1.azurewebsites.net/api/Proposals/Offers
 {
