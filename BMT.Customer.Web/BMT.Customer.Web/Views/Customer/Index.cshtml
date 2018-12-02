@@ -2,63 +2,78 @@
     ViewBag.Title = "Bid My Trip";
 }
 
-<div class="row margin-top">
+<div class="container">
+    <div class="text-center mb-5 mt-3">
+        <h1>Create new proposal</h1>
+    </div>
     <form id="customerForm" name="customerForm" method="post" action="">
-        <div class="form-group">
-            <label for="firstName">First Name:</label>
-            <input id="firstName" class="form-control" type="text" name="firstName" />
+        <div class="row">
+            <div class="col">
+                <label for="departureCity" class="h5">Departure City:</label>
+                <select id="departureCity" class="form-control">
+                    <option selected value="MAD">Madrid (MAD)</option>
+                    <option value="LON">Londres (LON)</option>
+                    <option value="HEL">Helsinki (HEL)</option>
+                    <option value="CPH">Copenhague (CPH)</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="arrivalCity" class="h5">Arrival City:</label>
+                <select id="arrivalCity" class="form-control">
+                    <option value="MAD">Madrid (MAD)</option>
+                    <option value="LON">Londres (LON)</option>
+                    <option selected value="HEL">Helsinki (HEL)</option>
+                    <option value="CPH">Copenhague (CPH)</option>
+                </select>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="secondName">Second Name:</label>
-            <input id="secondName" class="form-control" type="text" name="secondName" />
+        <div class="row mt-5">
+            <div class="col">
+                <label for="departureDatetime" class="h5">Outbount Date:</label>
+                <input id="departureDatetime" class="form-control" type="date" name="departureDatetime" min="2018-12-02" max="2019-12-02" />
+            </div>
+            <div class="col">
+                <label for="arrivalDatetime" class="h5">Inbound Date (*):</label>
+                <input id="arrivalDatetime" class="form-control" type="date" name="arrivalDatetime" min="2018-12-02" max="2019-12-02" />
+                <small id="emailHelp" class="form-text text-muted">(*) Optional.</small>
+            </div>
+            <div class="col">
+                <label for="passengerNumber" class="h5">Passenger num:</label>
+                <input id="passengerNumber" class="form-control" type="number" name="passengerNumber" value="1" />
+            </div>
+        </div>
+        <div class="row mt-5 d-flex">
+            <div class="col-sm-4 d-flex flex-row">
+                <label class="h5 mr-2" for="price">Top price:</label>
+                <input id="price" class="form-control form-control-lg" type="number" name="price" />
+            </div>
+            <button type="button" class="ml-5 btn btn-info btn-round">Avance options</button>
         </div>
 
-        <div class="form-group">
-            <label for="passengerType">Passenger type:</label>
-            <select id="passengerType" class="form-control" >
-                <option selected value="ADT">Adult</option>
-                <option value="CHD">Child</option>
-                <option value="INF">Infant</option>
-            </select>
-        </div>
+        <hr />
+        <h3>Passenger info</h3>
 
-        <div class="form-group">
-            <label for="departureCity">Departure City:</label>
-            <select id="departureCity" class="form-control">
-                <option selected value="MAD">Madrid</option>
-                <option value="LON">Londres</option>
-                <option value="HEL">Helsinki</option>
-                <option value="CPH">Copenhague</option>
-            </select>
-        </div>
-
-
-        <div class="form-group">
-            <label for="arrivalCity">Arrival City:</label>
-            <select id="arrivalCity" class="form-control">
-                <option value="MAD">Madrid</option>
-                <option value="LON">Londres</option>
-                <option selected value="HEL">Helsinki</option>
-                <option value="CPH">Copenhague</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="departureDatetime">Departure Date:</label>
-            <input id="departureDatetime" class="form-control" type="date" name="departureDatetime" min="2018-12-02" max="2019-12-02" />
-        </div>
-
-        <div class="form-group">
-            <label for="arrivalDatetime">Arrival Date:</label>
-            <input id="arrivalDatetime" class="form-control" type="date" name="arrivalDatetime" min="2018-12-02" max="2019-12-02" />
-        </div>
-
-        <div class="form-group">
-            <label for="price">Price:</label>
-            <input id="price" class="form-control" type="number" name="price" />
+        <div class="mt-5">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="First name" name="firstName">
+                </div>
+                <div class="col">
+                    <input id="secondName" class="form-control" type="text" placeholder="Last name" name="secondName" />
+                </div>
+                <div class="col">
+                    <select id="passengerType" class="form-control">
+                        <option selected value="ADT">Adult</option>
+                        <option value="CHD">Child</option>
+                        <option value="INF">Infant</option>
+                    </select>
+                    <small id="emailHelp" class="form-text text-muted">Passenger type. Infants may only travel in the company of an adult.</small>
+                </div>
+            </div>
         </div>
 
         <button type="submit" class="btn btn-primary">Sent Proposal</button>
+        <button type="button" class="btn btn-secondary">Cancel</button>
     </form>
 </div>
