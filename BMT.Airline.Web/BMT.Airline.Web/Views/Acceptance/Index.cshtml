@@ -96,7 +96,7 @@ else
             <tbody>
                 @foreach (var offer in Model.Offers)
                 {
-                    <tr class="@(offer.Selected ? "success": "")">
+                    <tr class="@(offer.Selected ? "table-success": "")">
                         <td>@offer.CreationTime</td>
                         <td>@offer.AirlineName</td>
                         <td>@offer.DepartureDate.ToShortDateString()</td>
