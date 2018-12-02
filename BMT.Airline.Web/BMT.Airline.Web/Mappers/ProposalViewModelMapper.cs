@@ -32,7 +32,8 @@ namespace BMT.Airline.Web.Mappers
                 IsAcceptable = BuildIsAcceptable(proposalDto, configuration),
                 Passengers = BuildPassengers(proposalDto),
                 Offers = proposalDto.Offers.Select(OfferViewModelMapper.Map),
-                Status = proposalDto.Status
+                Status = proposalDto.Status,
+                AirlineLogo = configuration.AirlineLogo
             };
         }
 
