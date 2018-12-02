@@ -36,11 +36,13 @@ namespace BMT.Customer.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> SentProposal(CustomerFormDto CustomerFormRequestDto)
+        public async Task<ActionResult> SentProposal(CustomerFormDto CustomerFormRequestDto)
         {
             var proposalModel = MapProposalModel(CustomerFormRequestDto);
 
-            return await _proposalService.SendProposal(proposalModel);
+            await _proposalService.SendProposal(proposalModel);
+
+            return RedirectToAction("Proposals", "Customer");
         }
 
         private IEnumerable<ProposalDto> MapProposalDto(IEnumerable<ProposalModel> distintictProposals)
