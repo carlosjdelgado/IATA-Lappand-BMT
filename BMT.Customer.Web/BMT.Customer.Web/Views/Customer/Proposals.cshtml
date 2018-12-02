@@ -26,7 +26,10 @@
                 <td>@proposal.ArrivalCity</td>
                 <td>@proposal.Price</td>
                 <td>
-                    @Html.ActionLink("Go to Offers", "Index", "Offer", new { ProposalId = proposal.ProposalId }, null)
+                    @if (proposal.HasOffers)
+                    {
+                        @Html.ActionLink("Go to Offers", "Index", "Offer", new { ProposalId = proposal.ProposalId }, null)
+                    }
                 </td>
             </tr>
         }
