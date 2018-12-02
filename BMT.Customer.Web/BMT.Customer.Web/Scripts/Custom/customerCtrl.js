@@ -26,7 +26,7 @@ $(document).ready(function () {
             data: { CustomerFormRequestDto: CustomerFormRequestDto },
             cache: false,
             success: function (result) {
-                alert("Proposal sended");
+                window.location.replace("/Customer/Proposals");
             }
         });
     });

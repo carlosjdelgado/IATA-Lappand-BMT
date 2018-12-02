@@ -3,6 +3,7 @@
 
     ViewBag.Title = "Index";
     ViewBag.AirlineName = Model.AirlineName;
+    ViewBag.AirlineLogo = Model.AirlineLogo;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,7 +24,7 @@
         @foreach (var proposal in Model.Proposals)
         {
 
-            <tr class="@GetItemClass(proposal.IsAcceptable, proposal.Offers.Count(), proposal.Status)">
+            <tr class="@GetItemClass(proposal.IsAcceptable, proposal.Offers.Count(), proposal.Status) @(proposal.IsInteresting?"font-weight-bold":"")">
                 <td>@proposal.DepartureDate.ToShortDateString()</td>
                 <td>@proposal.ReturnDate.ToShortDateString()</td>
                 <td>@proposal.DepartureCity</td>
@@ -50,15 +51,15 @@
     public string GetItemClass(bool isAcceptable, int NumberOfOffers, string status)
     {
         if (!isAcceptable)
-            return "active";
+            return "table-active";
 
         if (NumberOfOffers > 0)
-            return "info";
+            return "table-info";
 
         if (status == "CONFIRMED" || status == "CLOSED")
-            return "success";
+            return "table-success";
 
-        return "warning";
+        return "table-warning";
     }
 }
 

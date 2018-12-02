@@ -36,11 +36,13 @@ namespace BMT.Customer.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> SentProposal(CustomerFormDto CustomerFormRequestDto)
+        public async Task<ActionResult> SentProposal(CustomerFormDto CustomerFormRequestDto)
         {
             var proposalModel = MapProposalModel(CustomerFormRequestDto);
 
-            return await _proposalService.SendProposal(proposalModel);
+            var response = await _proposalService.SendProposal(proposalModel);
+
+            return RedirectToAction("Proposals", "Customer");
         }
 
         private IEnumerable<ProposalDto> MapProposalDto(IEnumerable<ProposalModel> distintictProposals)
@@ -56,11 +58,15 @@ namespace BMT.Customer.Web.Controllers
                     InboundDate = distintictProposal.InboundDate,
                     DepartureCity = distintictProposal.Origin,
                     ArrivalCity = distintictProposal.Destiny,
-                    Price = distintictProposal.Price
+                    Price = distintictProposal.Price,
+                    Status = distintictProposal.Status,
+                    HasOffers = distintictProposal.Offers.Count() > 0,
+                    TravellerName = distintictProposal.TravellerName,
+                    CreationDate = distintictProposal.CreationDate
                 });
             }
 
-            return proposalDtoList;
+            return proposalDtoList.OrderByDescending(p => p.CreationDate);
         }
 
         private IEnumerable<ProposalModel> GetDistinctProposals(IEnumerable<ProposalModel> proposalsModel)

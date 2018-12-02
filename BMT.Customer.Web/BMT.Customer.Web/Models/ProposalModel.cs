@@ -18,6 +18,7 @@ namespace BMT.Customer.Web.Models
         public PassengerModel Passenger4 { get; set; }
         public DateTime TimeToLive { get; set; }
         public string Status { get; set; }
+        public DateTime CreationDate { get; set; }
         public IEnumerable<OfferModel> Offers { get; set; } = new List<OfferModel>();
     }
 }

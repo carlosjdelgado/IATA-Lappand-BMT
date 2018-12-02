@@ -1,5 +1,6 @@
 ﻿using BMT.Airline.Web.Mappers;
 using BMT.Airline.Web.Models;
+using BMT.Airline.Web.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,19 @@ namespace BMT.Airline.Web.Services
             return new ProposalsReportViewModel
             {
                 AirlineName = _configuration.AirlineName,
-                Proposals = proposals.Select(p => ProposalViewModelMapper.Map(p, _configuration)) 
+                AirlineLogo = _configuration.AirlineLogo,
+                Proposals = BuildProposals(proposals)
             };
         }
+
+        private IEnumerable<ProposalViewModel> BuildProposals(IEnumerable<ProposalDto> proposals)
+        {
+            var filteredProposals = proposals
+                .Where(p => !_configuration.UnnaceptableOrigins.Contains(p.Origin))
+                .Where(p => !_configuration.UnnaceptableDestinations.Contains(p.Destiny));
+
+            return filteredProposals.Select(p => ProposalViewModelMapper.Map(p, _configuration));
+        }    
 
         public async Task<ProposalViewModel> GetProposal(string proposalId)
         {

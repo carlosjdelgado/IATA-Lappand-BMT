@@ -9,6 +9,7 @@ namespace BMT.Customer.Web.Dtos
         public DateTime InboundDate { get; set; }
         public decimal Price { get; set; }
         public bool IsBestPrice { get; set; }
+        public bool Selected { get; set; }
         public void SetAsBestPrice()
         {
             IsBestPrice = true;
