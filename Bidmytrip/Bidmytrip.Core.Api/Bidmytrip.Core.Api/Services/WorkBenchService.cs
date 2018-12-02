@@ -43,6 +43,40 @@ namespace Bidmytrip.Core.Api.Services
                 contract.LedgerId.ToString());
         }
 
+        internal async Task RecordAcceptance(string authToken, ProposalDto proposal)
+        {
+            InitializeGatewayInstance(authToken);
+
+            var contract = await GetContract();
+            var workFlow = await GetWorkFlow();
+
+            var workFlowInfoId = await GetNextWorkflowInfoId(workFlow.Id.ToString());
+
+            var action = BuildNewProposalAction(workFlowInfoId, proposal);
+
+            var result = await _apiGateway.CreateNewContractAsync(action,
+                workFlow.Id.ToString(),
+                contract.ContractCodeId.ToString(),
+                contract.LedgerId.ToString());
+        }
+
+        internal async Task RecordConfirm(string authToken, ProposalDto proposal)
+        {
+            InitializeGatewayInstance(authToken);
+
+            var contract = await GetContract();
+            var workFlow = await GetWorkFlow();
+
+            var workFlowInfoId = await GetNextWorkflowInfoId(workFlow.Id.ToString());
+
+            var action = BuildNewProposalAction(workFlowInfoId, proposal);
+
+            var result = await _apiGateway.CreateNewContractAsync(action,
+                workFlow.Id.ToString(),
+                contract.ContractCodeId.ToString(),
+                contract.LedgerId.ToString());
+        }
+
         private static ActionInformation BuildNewProposalAction(long workFlowInfoId, ProposalDto proposal)
         {
             return new ActionInformation()
