@@ -59,6 +59,7 @@ namespace BMT.Customer.Web.Controllers
                     DepartureCity = distintictProposal.Origin,
                     ArrivalCity = distintictProposal.Destiny,
                     Price = distintictProposal.Price,
+                    Status = distintictProposal.Status
                     HasOffers = distintictProposal.Offers.Count() > 0
                 });
             }

@@ -19,7 +19,7 @@
     <tbody>
         @foreach (var proposal in Model.Proposals)
         {
-            <tr>
+            <tr class="@GetItemClass(proposal.Status)">
                 <td>@proposal.OutboundDate.ToShortDateString()</td>
                 <td>@proposal.InboundDate.ToShortDateString()</td>
                 <td>@proposal.DepartureCity</td>
@@ -35,3 +35,12 @@
         }
     </tbody>
 </table>
+@functions {
+    public string GetItemClass(string status)
+    {
+        if (status == "CONFIRMED" || status == "CLOSED")
+            return "bg-yellow";
+
+        return "";
+    }
+}
