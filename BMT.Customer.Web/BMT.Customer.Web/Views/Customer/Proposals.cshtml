@@ -28,7 +28,14 @@
                 <td>
                     @if (proposal.HasOffers)
                     {
-                        @Html.ActionLink("Go to Offers", "Index", "Offer", new { ProposalId = proposal.ProposalId }, null)
+                        if (proposal.Status == "CONFIRMED" || proposal.Status == "CLOSED")
+                        {
+                            @Html.ActionLink("View", "Index", "Offer", new { ProposalId = proposal.ProposalId }, null)
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Go to Offers", "Index", "Offer", new { ProposalId = proposal.ProposalId }, null)
+                        }
                     }
                 </td>
             </tr>
